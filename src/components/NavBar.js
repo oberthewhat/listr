@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
-import { borders } from '@material-ui/system';
 
 
 const useStyles = makeStyles(theme => ({

@@ -9,8 +9,6 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Button from '@material-ui/core/button'
 import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,16 +37,12 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function SimpleExpansionPanel() {
+const Listings = (props) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-			<Grid item xs={60} className={classes.paperGrid}>
-          <Paper className={classes.paper}>Welcome to ListR<br/>
-					Please rate each restaraunt based on a generalized opinion based on the whole dining experience. Vote up if you enjoyed, vote down if you did not
-					</Paper>
-        </Grid>
+
 			<div className={classes.item}>
 				<div className={classes.voter} >
 					<Box boxShadow={2} className={classes.voter}>
@@ -79,3 +73,5 @@ export default function SimpleExpansionPanel() {
     </div>
   );
 }
+
+export default Listings
