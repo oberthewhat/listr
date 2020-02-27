@@ -28,7 +28,9 @@ const Home = (props) => {
 		  </Paper>
 	  </Grid>
 		<div className="iconContainer">
-			
+			<Paper>hello</Paper>
+			<Paper>hello</Paper>
+			<Paper>hello</Paper>
 		</div>
 	</div>
   );
