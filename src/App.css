@@ -1,27 +1,34 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
-.App-link {
-  color: #61dafb;
+* {
+  font-family: 'Open Sans', sans-serif;
 }
 
 .iconContainer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+  margin: 50px;
+  width: 60%;
+}
+
+.homeMain {
+display: flex;
+justify-content: center;
+width: 100%;
+}
+
+.icons {
+  font-size: 80px;
+  margin: 20px;
+}
+
+#chooseHeading {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
 }

@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   title: {
 		flexGrow: 6,
 		fontSize: 40,
-		fontFamily: "",
+		fontFamily: "'Open Sans', sans-serif",
 	},
 	mood: {
 		marginRight: 10,
