@@ -6,11 +6,13 @@ import {
 	DialogContent,
 	DialogTitle
 } from '@material-ui/core'
+import { connect} from 'react-redux'
+import LogIn from '../components/login';
+import { userLogIn } from "../redux/actions";
 
-class LogIn extends Component {
-	state = {
-		open: false,
-		username: '',
-		password: '',
+const mapDispatchToProps = (dispatch) => {
+	return {
+			userLogIn: (user) => dispatch(userLogIn(user))
 	}
 }
+export default connect(null, mapDispatchToProps)(LogIn)

@@ -1,14 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+
 import Button from '@material-ui/core/Button';
 import {
 	FaPizzaSlice,
-	FaHamburger
+	FaHamburger,
+	FaFish
 } from 'react-icons/fa'
 import {
 	GiNoodles,
 	GiSandwich,
-	GiCupcake
+	GiCupcake,
+	GiTacos,
+	GiSteak
 } from "react-icons/gi"
 import { BsEggFried } from "react-icons/bs";
 const useStyles = makeStyles(theme => ({
@@ -38,8 +42,9 @@ const Home = (props) => {
 					<Button><BsEggFried className='icons' /></Button>
 					<Button><GiSandwich className='icons' /></Button>
 					<Button><GiCupcake className='icons' /></Button>
-					<Button><BsEggFried className='icons' /></Button>
-					<Button><BsEggFried className='icons' /></Button>
+					<Button><GiTacos className='icons' /></Button>
+					<Button><FaFish className='icons' /></Button>
+					<Button><GiSteak className='icons'/></Button>
 				</div>
 			</div>
 		</div>

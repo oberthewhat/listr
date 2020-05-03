@@ -5,6 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
+import LogIn from '../containers/login';
+import FormDialog from '../containers/login'
 
 
 const useStyles = makeStyles(theme => ({
@@ -36,8 +38,19 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             ListR
           </Typography>
-          <Button color="inherit">
-						<MoodBadIcon className={classes.mood}/>Login</Button>
+          {/* <Button color="inherit">
+						<MoodBadIcon className={classes.mood}/>Login</Button> */}
+
+{/* THIS IS WHERE I AM GETTING AN ERROR!!!! */}
+
+            {/* <div className="loginButton">
+            <LogIn/>
+            </div>
+ */}
+
+<FormDialog/>
+
+
         </Toolbar>
       </AppBar>
     </div>
