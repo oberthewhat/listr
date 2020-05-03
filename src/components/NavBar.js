@@ -3,9 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import MoodBadIcon from '@material-ui/icons/MoodBad';
-import LogIn from '../containers/login';
 import FormDialog from '../containers/login'
 
 
@@ -34,7 +31,7 @@ export default function ButtonAppBar() {
   return (
     <div>
       <AppBar position="static">
-        <Toolbar className={classes.root} borderBottom={0}>
+        <Toolbar className={classes.root} border={0}>
           <Typography variant="h6" className={classes.title}>
             ListR
           </Typography>
