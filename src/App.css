@@ -37,3 +37,9 @@
   font-weight: 800;
   font-size: 20px;
 }
+
+#createButton {
+  background-color: #035c7d;
+  color: white;
+  margin-left: 5px;
+}

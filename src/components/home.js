@@ -13,6 +13,7 @@ import {
 	GiSteak
 } from "react-icons/gi"
 import { BsEggFried } from "react-icons/bs";
+import ReactTooltip from "react-tooltip";
 
 class Home extends Component {
 
@@ -71,15 +72,16 @@ handleLocationError(error) {
 				<div id='chooseHeading'>Choose a cuisine</div>
 				<div className="homeMain">
 					<div className="iconContainer">
-						<Button id='pizza' onClick={this.getLocation}><FaPizzaSlice className='icons' /></Button>
-						<Button id='burger'><FaHamburger className='icons' /></Button>
-						<Button id='asian'><GiNoodles className='icons' /></Button>
-						<Button id='breakfast'><BsEggFried className='icons' /></Button>
-						<Button id='sandwich'><GiSandwich className='icons' /></Button>
-						<Button id='dessert'><GiCupcake className='icons' /></Button>
-						<Button id='mexican'><GiTacos className='icons' /></Button>
-						<Button id='seafood'><FaFish className='icons' /></Button>
-						<Button id='steak'><GiSteak className='icons' /></Button>
+						<Button id='pizza' data-tip='pizza' onClick={this.getLocation}><FaPizzaSlice className='icons' /></Button>
+						<Button id='burger' data-tip='burgers' ><FaHamburger className='icons' /></Button>
+						<Button id='asian' data-tip='asian' ><GiNoodles className='icons' /></Button>
+						<Button id='breakfast' data-tip='breakfast' ><BsEggFried className='icons' /></Button>
+						<Button id='sandwich' data-tip='sandwiches' ><GiSandwich className='icons' /></Button>
+						<Button id='dessert' data-tip='bakery' ><GiCupcake className='icons' /></Button>
+						<Button id='mexican' data-tip='mexican' ><GiTacos className='icons' /></Button>
+						<Button id='seafood' data-tip='seafood' ><FaFish className='icons' /></Button>
+						<Button id='steak' data-tip='steak' ><GiSteak className='icons' /></Button>
+						<ReactTooltip />
 					</div>
 				</div>
 				<div onLoad={this.getLocation}>coordinates: lat={this.state.latitude} long={this.state.longitude}

@@ -8,21 +8,21 @@ import FormDialog from '../containers/login'
 
 const useStyles = makeStyles(theme => ({
   root: {
-		flexGrow: 1,
-		backgroundColor: 'orangered',
-		height: 80,
+    flexGrow: 1,
+    backgroundColor: 'orangered',
+    height: 80,
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
-		flexGrow: 6,
-		fontSize: 40,
-		fontFamily: "'Open Sans', sans-serif",
-	},
-	mood: {
-		marginRight: 10,
-	}
+    flexGrow: 6,
+    fontSize: 40,
+    fontFamily: "'Open Sans', sans-serif",
+  },
+  mood: {
+    marginRight: 10,
+  }
 }));
 
 export default function ButtonAppBar() {
@@ -35,19 +35,8 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             ListR
           </Typography>
-          {/* <Button color="inherit">
-						<MoodBadIcon className={classes.mood}/>Login</Button> */}
-
-{/* THIS IS WHERE I AM GETTING AN ERROR!!!! */}
-
-            {/* <div className="loginButton">
-            <LogIn/>
-            </div>
- */}
-
-<FormDialog/>
-
-
+{/* this opens the dialog for log in */}
+          <FormDialog /> 
         </Toolbar>
       </AppBar>
     </div>
