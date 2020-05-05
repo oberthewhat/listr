@@ -10,6 +10,13 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Button from '@material-ui/core/button'
 import Box from '@material-ui/core/Box';
 
+
+// example of how to connect to the google places API 
+
+// https://maps.googleapis.com/maps/api/place/textsearch/json?input=pizza&inputtype=textquery&fields=formatted_address,name&locationbias=circle:2000@ipbias&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
+
+// google places API Key= AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',

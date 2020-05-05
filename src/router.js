@@ -6,8 +6,9 @@ import Listings from './containers/listings'
 const Router = () => {
     return (
         <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/listings" component={Listings} />
+            <Route exact path="/" component={Home} />
+            {/* <Route path="/Listings/:id" component={Listings} /> */}
+            <Route path="/Listings" component={Listings} />
         </Switch>
     );
 };

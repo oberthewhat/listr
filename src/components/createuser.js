@@ -53,7 +53,7 @@ export default function CreateUser() {
 				<DialogTitle id="form-dialog-title">Create Account</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
-						Create an account to start voting on a restaraunt
+						Create an account to start voting on restaurants
           </DialogContentText>
 					<TextField
 						autoFocus

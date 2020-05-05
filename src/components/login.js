@@ -52,7 +52,7 @@ export default function LogIn() {
 				<DialogTitle id="form-dialog-title">Sign In</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
-						Log in here to vote a restaraunt up or down.
+						Log in here to vote a restaurant up or down.
           </DialogContentText>
 					<TextField
 						autoFocus

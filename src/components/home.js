@@ -27,6 +27,10 @@ class Home extends Component {
 		this.getCoordinates = this.getCoordinates.bind(this);
 	}
 
+	componentDidMount() {
+		this.getLocation()
+	}
+
 	getLocation() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
@@ -72,7 +76,7 @@ handleLocationError(error) {
 				<div id='chooseHeading'>Choose a cuisine</div>
 				<div className="homeMain">
 					<div className="iconContainer">
-						<Button id='pizza' data-tip='pizza' onClick={this.getLocation}><FaPizzaSlice className='icons' /></Button>
+						<Button id='pizza' data-tip='pizza' ><FaPizzaSlice className='icons' /></Button>
 						<Button id='burger' data-tip='burgers' ><FaHamburger className='icons' /></Button>
 						<Button id='asian' data-tip='asian' ><GiNoodles className='icons' /></Button>
 						<Button id='breakfast' data-tip='breakfast' ><BsEggFried className='icons' /></Button>
