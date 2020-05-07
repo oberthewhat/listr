@@ -9,12 +9,6 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Button from '@material-ui/core/button'
 import Box from '@material-ui/core/Box';
-import { Component } from 'react';
-
-
-// example of how to connect to the google places API 
-
-// https://maps.googleapis.com/maps/api/place/textsearch/json?input=pizza&inputtype=textquery&fields=formatted_address,name&locationbias=circle:2000@ipbias&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,9 +38,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
+
+
 const Listings = (props) => {
 	const classes = useStyles();
- console.log(props.place)
+  console.log('props in listings component ', props.businesses)
+ console.log('listings props ', props)
   return (
     <div className={classes.root}>
 

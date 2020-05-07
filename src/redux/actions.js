@@ -20,47 +20,23 @@ export const getCords = (cords) => {
 	}
 }
 
-// zomato fucks
-
-// https://developers.zomato.com/api/v2.1/search?count=25&lat=30.059185300000003&lon=-97.8141421&radius=2000&cuisines=pizza
-
-
-
-// https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&rankby=distance&type=muse&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
-
-//location bias search 
-
-
-
-// https://maps.googleapis.com/maps/api/place/textsearch/json?input=pizza&inputtype=textquery&fields=photos,formatted_address,name,opening_hours,rating&locationbias=circle:2000@30.054809600000002,-97.8157568&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
-
-//nearby search
-
-// https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&rankby=distance&query=pizza&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
-
-// https://maps.googleapis.com/maps/api/place/textsearch/json?query=pizza&locationbias=circle:2000@ipbias&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
-
-// https://maps.googleapis.com/maps/api/place/textsearch/json?input=pizza&inputtype=textquery&fields=formatted_address,name&locationbias=circle:2000@ipbias&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
-
 export const getPlace = (lat, lon) => {
 
-
-	const proxyUrl = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?input=pizza&inputtype=textquery&fields=photos,formatted_address,name,opening_hours,rating&locationbias=circle:2000@30.054809600000002,-97.8157568&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64`
-
-	const zomatoAPI = `https://developers.zomato.com/api/v2.1/search?q=burgers&count=20&lat=30.054809600000002&lon=-97.8157568&radius=0`
+	const proxy = "https://cors-anywhere.herokuapp.com/"
+  const yelpAPI = 'https://api.yelp.com/v3/businesses/search?term=pizza&latitude=30.054809600000002&longitude=-97.8157568&limit=50'
 
 	return (dispatch) => {
-		fetch(zomatoAPI, { 
+		fetch(proxy + yelpAPI, { 
 			headers: {
-				"user-key":"5acb8cd02eec7af3fc19b1d95b41070d"
+				Authorization: "Bearer mTKaVgSrIJqL2gnul1zTNMBssMeAhJXNXjLDWT7BFwwPqefdbnToL00zIoPsqWd9PubnMaAJ70cYAFjFKcWv5K5Lwqhb_34czjeRarrGwIM8JPFZSWP95U_m85WzXnYx"
 			}
 		})
 			.then(res => res.json()
 				.then(response => {
-					console.log('actions', response)
+					console.log('actions response', response)
 					const action = {
 						type: 'FETCH_PLACE',
-						value: response.results,
+						value: response.Results,
 					}
 					dispatch(action)
 				}

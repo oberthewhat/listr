@@ -15,7 +15,7 @@ import {
 import { BsEggFried } from "react-icons/bs";
 import { Link } from 'react-router-dom'
 import ReactTooltip from "react-tooltip";
-import { getCords, getPlace } from '../redux/actions';
+import { getPlace } from '../redux/actions';
 
 class Home extends Component {
 
