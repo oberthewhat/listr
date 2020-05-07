@@ -33,10 +33,9 @@ export const getPlace = (lat, lon) => {
 		})
 			.then(res => res.json()
 				.then(response => {
-					console.log('actions response', response)
 					const action = {
 						type: 'FETCH_PLACE',
-						value: response.Results,
+						value: response.businesses
 					}
 					dispatch(action)
 				}

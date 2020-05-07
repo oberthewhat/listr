@@ -4,6 +4,7 @@ import { getPlace } from '../redux/actions'
 
  
 const mapStateToProps = (state) => {
+	// console.log('in listing container',state.place)
 	return {
 			getUser: state.user,
 			place: state.place,
