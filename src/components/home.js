@@ -13,6 +13,7 @@ import {
 	GiSteak
 } from "react-icons/gi"
 import { BsEggFried } from "react-icons/bs";
+import { Link } from 'react-router-dom'
 import ReactTooltip from "react-tooltip";
 
 class Home extends Component {
@@ -21,7 +22,7 @@ class Home extends Component {
 		super(props);
 		this.state = {
 			latitude: null,
-			longitude: null
+			longitude: null,
 		};
 		this.getLocation = this.getLocation.bind(this);
 		this.getCoordinates = this.getCoordinates.bind(this);
@@ -76,15 +77,34 @@ handleLocationError(error) {
 				<div id='chooseHeading'>Choose a cuisine</div>
 				<div className="homeMain">
 					<div className="iconContainer">
-						<Button id='pizza' data-tip='pizza' ><FaPizzaSlice className='icons' /></Button>
+						<Link to="/Listings/pizza" search="?q=pizza">
+						<Button id='pizza' onClick={this.props.getPlaces}
+						data-tip='pizza' ><FaPizzaSlice className='icons' /></Button>
+						</Link>
+						<Link to="/Listings/burgers">
 						<Button id='burger' data-tip='burgers' ><FaHamburger className='icons' /></Button>
+						</Link>
+						<Link to="/Listings/asian">
 						<Button id='asian' data-tip='asian' ><GiNoodles className='icons' /></Button>
+						</Link>
+						<Link to="/Listings/breakfast">
 						<Button id='breakfast' data-tip='breakfast' ><BsEggFried className='icons' /></Button>
+						</Link>
+						<Link to="/Listings/sandwich">
 						<Button id='sandwich' data-tip='sandwiches' ><GiSandwich className='icons' /></Button>
+						</Link>
+						<Link to="/Listings/dessert">
 						<Button id='dessert' data-tip='bakery' ><GiCupcake className='icons' /></Button>
+						</Link>
+						<Link to="/Listings/mexican">
 						<Button id='mexican' data-tip='mexican' ><GiTacos className='icons' /></Button>
+						</Link>
+						<Link to="/Listings/seafood">
 						<Button id='seafood' data-tip='seafood' ><FaFish className='icons' /></Button>
+						</Link>
+						<Link to="/Listings/steak">
 						<Button id='steak' data-tip='steak' ><GiSteak className='icons' /></Button>
+						</Link>
 						<ReactTooltip />
 					</div>
 				</div>

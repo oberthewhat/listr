@@ -6,34 +6,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import FormDialog from '../containers/createuser';
 
 export default function LogIn() {
 	const [open, setOpen] = React.useState(false);
-	const [values, setValues] = React.useState({
-		amount: '',
-		password: '',
-		weight: '',
-		weightRange: '',
-		showPassword: false,
-	})
-
-	const handleClickShowPassword = () => {
-		setValues({ ...values, showPassword: !values.showPassword });
-	};
-
-	const handleChange = (prop) => (event) => {
-		setValues({ ...values, [prop]: event.target.value });
-	};
-
-	const handleMouseDownPassword = (event) => {
-		event.preventDefault();
-	};
 
 	const handleClickOpen = () => {
 		setOpen(true);

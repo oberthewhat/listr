@@ -12,15 +12,26 @@ export const newUser = (text) => {
 	}
 }
 
-export const getPlaces = (type) => {
+
+
+// https://maps.googleapis.com/maps/api/place/textsearch/json?query=pizza&locationbias=circle:2000@ipbias&42.3675294,-71.186966&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
+
+export const getPlace = () => {
+
+	const proxyUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=pizza&locationbias=circle:2000@ipbias&42.3675294,-71.186966&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64"
+	console.log('hello?')
+	
 	return (dispatch) => {
-		fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?input=A${type}&inputtype=textquery&fields=formatted_address,name&locationbias=circle:2000@ipbias&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64`)
+		fetch(proxyUrl)
 			.then(res => res.json()
 				.then(response => {
 					const action = {
-						type: 'FETCH_RESTAURANTS',
-						value: response.results
+						type: 'FETCH_PLACE',
+						value: response.results,
 					}
 					dispatch(action)
-				}))
-	}}
+				}
+				)
+			)
+	}
+}

@@ -43,3 +43,8 @@
   color: white;
   margin-left: 5px;
 }
+
+#listrTitle {
+  color: inherit;
+  text-decoration: none;
+}

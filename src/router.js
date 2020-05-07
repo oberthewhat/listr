@@ -7,7 +7,7 @@ const Router = () => {
     return (
         <Switch>
             <Route exact path="/" component={Home} />
-            {/* <Route path="/Listings/:id" component={Listings} /> */}
+            <Route path="/Listings/:type" component={Listings} />
             <Route path="/Listings" component={Listings} />
         </Switch>
     );

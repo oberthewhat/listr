@@ -44,8 +44,9 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
+
 const Listings = (props) => {
-  const classes = useStyles();
+	const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -53,7 +54,7 @@ const Listings = (props) => {
 			<div className={classes.item}>
 				<div className={classes.voter} >
 					<Box boxShadow={2} className={classes.voter}>
-						<Button>
+						<Button onClick={props.getPlace}>
 							<ArrowUpwardIcon/>
 						</Button>
 						<Button>

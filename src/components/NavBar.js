@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import FormDialog from '../containers/login'
-
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,7 +33,9 @@ export default function ButtonAppBar() {
       <AppBar position="static">
         <Toolbar className={classes.root} border={0}>
           <Typography variant="h6" className={classes.title}>
+            <Link id="listrTitle" to="/">
             ListR
+            </Link>
           </Typography>
 {/* this opens the dialog for log in */}
           <FormDialog /> 

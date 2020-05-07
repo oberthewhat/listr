@@ -2,9 +2,9 @@ import { connect } from  'react-redux'
 import CreateUser from '../components/createuser';
 import { newUser } from '../redux/actions';
 
-const mapDispachToProps = (dispach) => {
+const mapDispatchToProps = (dispatch) => {
 	return {
-		newUser: (newbie) => dispach(newUser(newbie))
+		newUser: (newbie) => dispatch(newUser(newbie))
 	}
 }
-export default connect(null, mapDispachToProps)(CreateUser)
+export default connect(null, mapDispatchToProps)(CreateUser)

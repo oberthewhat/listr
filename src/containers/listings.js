@@ -1,14 +1,19 @@
 import { connect } from 'react-redux'
 import Listings from '../components/Listings'
-
+import { getPlace } from '../redux/actions'
 
 const mapStateToProps = (state) => {
 	return {
-			user: state.user,
+			getUser: state.user,
 			place: state.place,
-			cuisine: state.cuisine
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+			getPlace: (place) => dispatch(getPlace(place))
 	}
 }
 
 
-export default connect(mapStateToProps)(Listings)
+export default connect(mapStateToProps, mapDispatchToProps)(Listings)

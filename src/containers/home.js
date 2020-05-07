@@ -1,19 +1,19 @@
 import { connect } from 'react-redux'
 import Home from '../components/home'
+import { getPlace } from '../redux/actions'
 
 
 const mapStateToProps = (state) => {
 	return {
 			user: state.user,
 			place: state.place,
-			cuisine: state.cuisine
 	}
 }
 
-// const mapDispatchToProps = (dispatch) => {
-// 	return {
-// 			removePlace: (index) => dispatch(removePlace(index))
-// 	}
-// }
+const mapDispatchToProps = (dispatch) => {
+	return {
+			getPlace: (place) => dispatch(getPlace(place))
+	}
+}
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
