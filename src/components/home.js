@@ -15,6 +15,7 @@ import {
 import { BsEggFried } from "react-icons/bs";
 import { Link } from 'react-router-dom'
 import ReactTooltip from "react-tooltip";
+import { getCords, getPlace } from '../redux/actions';
 
 class Home extends Component {
 
@@ -46,8 +47,13 @@ class Home extends Component {
 		document.cookie="longitude="+position.coords.longitude; 
 		this.setState({
 			latitude: position.coords.latitude,
-			longitude: position.coords.longitude
+			longitude: position.coords.longitude,
 		})
+		const userCords = {
+			lat: this.state.latitude,
+			lon: this.state.longitude
+		}
+		console.log("home component", userCords)
 	}
 
 handleLocationError(error) {
@@ -78,7 +84,7 @@ handleLocationError(error) {
 				<div className="homeMain">
 					<div className="iconContainer">
 						<Link to="/Listings/pizza" search="?q=pizza">
-						<Button id='pizza' onClick={this.props.getPlaces}
+						<Button id='pizza' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude)}
 						data-tip='pizza' ><FaPizzaSlice className='icons' /></Button>
 						</Link>
 						<Link to="/Listings/burgers">

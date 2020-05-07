@@ -1,8 +1,7 @@
 export default {
-	place: {
-		
-		Penis: 'small'
-},
+	place: [
+
+	],
 	user:[
 
 	]

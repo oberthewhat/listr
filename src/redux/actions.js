@@ -12,19 +12,32 @@ export const newUser = (text) => {
 	}
 }
 
+export const getCords = (cords) => {
+	console.log("actions", cords)  // checking actions 
+	return {
+		type: "GET_CORDS",
+		value: cords
+	}
+}
+
+//location bias search 
+
+// https://maps.googleapis.com/maps/api/place/textsearch/json?input=pizza&inputtype=textquery&fields=photos,formatted_address,name,opening_hours,rating&locationbias=circle:2000@30.054809600000002,-97.8157568&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
+
+// https://maps.googleapis.com/maps/api/place/textsearch/json?query=pizza&locationbias=circle:2000@ipbias&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
+
+// https://maps.googleapis.com/maps/api/place/textsearch/json?input=pizza&inputtype=textquery&fields=formatted_address,name&locationbias=circle:2000@ipbias&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
+
+export const getPlace = (lat, lon) => {
 
 
-// https://maps.googleapis.com/maps/api/place/textsearch/json?query=pizza&locationbias=circle:2000@ipbias&42.3675294,-71.186966&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
+	const proxyUrl = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?input=pizza&inputtype=textquery&fields=photos,formatted_address,name,opening_hours,rating&locationbias=circle:2000@30.054809600000002,-97.8157568&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64`
 
-export const getPlace = () => {
-
-	const proxyUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=pizza&locationbias=circle:2000@ipbias&42.3675294,-71.186966&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64"
-	console.log('hello?')
-	
 	return (dispatch) => {
 		fetch(proxyUrl)
 			.then(res => res.json()
 				.then(response => {
+					console.log('actions', response.request)
 					const action = {
 						type: 'FETCH_PLACE',
 						value: response.results,

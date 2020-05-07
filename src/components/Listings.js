@@ -9,13 +9,12 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Button from '@material-ui/core/button'
 import Box from '@material-ui/core/Box';
+import { Component } from 'react';
 
 
 // example of how to connect to the google places API 
 
 // https://maps.googleapis.com/maps/api/place/textsearch/json?input=pizza&inputtype=textquery&fields=formatted_address,name&locationbias=circle:2000@ipbias&key=AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
-
-// google places API Key= AIzaSyB8yc8dpOl3hsMFyctn39j3pOMferzdE64
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,14 +46,14 @@ const useStyles = makeStyles(theme => ({
 
 const Listings = (props) => {
 	const classes = useStyles();
-
+ console.log(props.place)
   return (
     <div className={classes.root}>
 
 			<div className={classes.item}>
 				<div className={classes.voter} >
 					<Box boxShadow={2} className={classes.voter}>
-						<Button onClick={props.getPlace}>
+						<Button >
 							<ArrowUpwardIcon/>
 						</Button>
 						<Button>
@@ -62,6 +61,7 @@ const Listings = (props) => {
 						</Button>
 					</Box>
 					</div>
+
       <ExpansionPanel>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
