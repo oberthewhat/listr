@@ -7,15 +7,15 @@ const place = (state = [], action) => {
 	switch (action.type) {
 		case 'FETCH_PLACE':
 			// console.log('reducers', state)
-			return [action.value]
+			return [...action.value]
 		default:
 			return state
 	}
 }
 
-const cords = (state = [], action) => {
+const coords = (state = [], action) => {
 	switch (action.type) {
-		case 'GET_CORDS':
+		case 'GET_COORDS':
 	
 			return [action.cords]
 			
@@ -26,4 +26,4 @@ const cords = (state = [], action) => {
 
 
 
-export default combineReducers({ place, cords })
+export default combineReducers({ place, coords })

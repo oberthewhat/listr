@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Home from '../components/home'
-import { getPlace, getCords } from '../redux/actions'
+import { getPlace, getCoords } from '../redux/actions'
 
 
 
@@ -8,14 +8,14 @@ const mapStateToProps = (state) => {
 	return {
 			user: state.user,
 			place: state.place,
-			cords: state.cords
+			coords: state.coords
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-			getPlace: (place) => dispatch(getPlace(place)),
-			getCords: (cords) => dispatch(getCords(cords))
+			getPlace: (lat, lon, type) => dispatch(getPlace(lat, lon, type)),
+			getCoords: (coords) => dispatch(getCoords(coords))
 	}
 }
 

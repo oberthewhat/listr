@@ -34,7 +34,7 @@ export default function ButtonAppBar() {
         <Toolbar className={classes.root} border={0}>
           <Typography variant="h6" className={classes.title}>
             <Link id="listrTitle" to="/">
-            ListR
+            Listr 
             </Link>
           </Typography>
 {/* this opens the dialog for log in */}

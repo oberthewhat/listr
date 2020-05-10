@@ -15,7 +15,6 @@ import {
 import { BsEggFried } from "react-icons/bs";
 import { Link } from 'react-router-dom'
 import ReactTooltip from "react-tooltip";
-import { getPlace } from '../redux/actions';
 
 class Home extends Component {
 
@@ -84,37 +83,35 @@ handleLocationError(error) {
 				<div className="homeMain">
 					<div className="iconContainer">
 						<Link to="/Listings/pizza" search="?q=pizza">
-						<Button id='pizza' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude)}
+						<Button id='pizza' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'pizza')}
 						data-tip='pizza' ><FaPizzaSlice className='icons' /></Button>
 						</Link>
 						<Link to="/Listings/burgers">
-						<Button id='burger' data-tip='burgers' ><FaHamburger className='icons' /></Button>
+						<Button id='burger' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'burgers')}data-tip='burgers' ><FaHamburger className='icons' /></Button>
 						</Link>
 						<Link to="/Listings/asian">
-						<Button id='asian' data-tip='asian' ><GiNoodles className='icons' /></Button>
+						<Button id='asian' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'asian')} data-tip='asian' ><GiNoodles className='icons' /></Button>
 						</Link>
 						<Link to="/Listings/breakfast">
-						<Button id='breakfast' data-tip='breakfast' ><BsEggFried className='icons' /></Button>
+						<Button id='breakfast' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'breakfast')}data-tip='breakfast' ><BsEggFried className='icons' /></Button>
 						</Link>
 						<Link to="/Listings/sandwich">
-						<Button id='sandwich' data-tip='sandwiches' ><GiSandwich className='icons' /></Button>
+						<Button id='sandwich' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'sandwich')}data-tip='sandwiches' ><GiSandwich className='icons' /></Button>
 						</Link>
-						<Link to="/Listings/dessert">
-						<Button id='dessert' data-tip='bakery' ><GiCupcake className='icons' /></Button>
+						<Link to="/Listings/bakery">
+						<Button id='dessert' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'bakery')} data-tip='bakery' ><GiCupcake className='icons' /></Button>
 						</Link>
 						<Link to="/Listings/mexican">
-						<Button id='mexican' data-tip='mexican' ><GiTacos className='icons' /></Button>
+						<Button id='mexican' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'mexican')}data-tip='mexican' ><GiTacos className='icons' /></Button>
 						</Link>
 						<Link to="/Listings/seafood">
-						<Button id='seafood' data-tip='seafood' ><FaFish className='icons' /></Button>
+						<Button id='seafood' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'seafood')}data-tip='seafood' ><FaFish className='icons' /></Button>
 						</Link>
 						<Link to="/Listings/steak">
-						<Button id='steak' data-tip='steak' ><GiSteak className='icons' /></Button>
+						<Button id='steak' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'steak')}data-tip='steak' ><GiSteak className='icons' /></Button>
 						</Link>
 						<ReactTooltip />
 					</div>
-				</div>
-				<div onLoad={this.getLocation}>coordinates: lat={this.state.latitude} long={this.state.longitude}
 				</div>
 			</div>
 

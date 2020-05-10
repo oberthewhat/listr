@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,7 +9,43 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function CreateUser() {
 
-	const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+	const [user, setUser] = useState({
+		email: '',
+		username: '',
+		password: ''
+});
+
+function handleChange(e) {
+	const { id, value } = e.target;
+	setUser(user => ({ ...user, [id]: value }));
+	console.log(user)
+}
+
+
+async function handleSubmit (e){
+
+	let newUser = {
+		email: user.email,
+		username: user.username,
+		password: user.password
+	};
+	
+	let response = await fetch('http://localhost:4001/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(newUser)
+	});
+	
+	let result = await response.json();
+	console.log(result)
+
+	}
+
+
+	
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -32,28 +68,34 @@ export default function CreateUser() {
           </DialogContentText>
 					<TextField
 						autoFocus
+						onChange = {handleChange}
 						margin="dense"
-						id="name"
+						id="username"
 						label="Username"
 						type="username"
+						value={user.username}
 						fullWidth
 					/>
 					<TextField
+						onChange = {handleChange}
 						margin="dense"
 						id="email"
 						label="email"
 						type="email"
+						value={user.email}
 						fullWidth
 					/>
 					<TextField
-						id="password1"
+						onChange = {handleChange}
+						id="password"
 						label="Password"
 						type="password"
 						autoComplete="current-password"
+						value={user.password}
 						fullWidth
 					/>
 					<TextField
-						id="password2"
+						id="password"
 						label="Confirm Password"
 						type="password"
 						autoComplete="current-password"
@@ -62,7 +104,7 @@ export default function CreateUser() {
 				</DialogContent>
 				<DialogActions>
 					{/* MAKE THIS BUTTON HANDLE ADDING INFO TO MONGO */}
-					<Button onClick={handleClose} color="primary">
+					<Button onClick={handleSubmit} color="primary">
 						Create Account
           </Button>
 					<Button onClick={handleClose} color="primary">

@@ -12,18 +12,21 @@ export const newUser = (text) => {
 	}
 }
 
-export const getCords = (cords) => {
-	console.log("actions", cords)  // checking actions 
+export const getCoords = (coords) => {
+	console.log("actions", coords)  // checking actions 
 	return {
-		type: "GET_CORDS",
-		value: cords
+		type: "GET_COORDS",
+		value: coords
 	}
 }
 
-export const getPlace = (lat, lon) => {
+export const getPlace = (lat, lon, type) => {
+	console.log('actions lat', lat)
+	console.log('actions lon', lon)
+	console.log('actions type', type)
 
 	const proxy = "https://cors-anywhere.herokuapp.com/"
-  const yelpAPI = 'https://api.yelp.com/v3/businesses/search?term=pizza&latitude=30.054809600000002&longitude=-97.8157568&limit=50'
+  const yelpAPI = `https://api.yelp.com/v3/businesses/search?term=${type}&latitude=${lat}&longitude=${lon}&limit=20`
 
 	return (dispatch) => {
 		fetch(proxy + yelpAPI, { 

@@ -4,5 +4,9 @@ export default {
 	],
 	user:[
 
-	]
+	],
+	coords: {
+		latitude: null,
+		longitude: null
+	}
 }
