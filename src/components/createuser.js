@@ -13,7 +13,8 @@ export default function CreateUser() {
 	const [user, setUser] = useState({
 		email: '',
 		username: '',
-		password: ''
+		password: '',
+		password2: ''
 });
 
 function handleChange(e) {
@@ -24,14 +25,16 @@ function handleChange(e) {
 
 
 async function handleSubmit (e){
+	console.log(user.username)
 
 	let newUser = {
 		email: user.email,
 		username: user.username,
-		password: user.password
+		password: user.password,
+		password2: user.password2
 	};
 	
-	let response = await fetch('http://localhost:4001/', {
+	let response = await fetch('http://localhost:8080/', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -41,6 +44,7 @@ async function handleSubmit (e){
 	
 	let result = await response.json();
 	console.log(result)
+	
 
 	}
 
@@ -95,23 +99,22 @@ async function handleSubmit (e){
 						fullWidth
 					/>
 					<TextField
-						id="password"
+						id="password2"
 						label="Confirm Password"
 						type="password"
 						autoComplete="current-password"
+						value={user.password2}
 						fullWidth
 					/>
 				</DialogContent>
 				<DialogActions>
-					{/* MAKE THIS BUTTON HANDLE ADDING INFO TO MONGO */}
+{/* THIS BUTTON SHOULD MATCH THE USER ENTRY FOR THEIR PASSWORDS TO CONFIRM THAT THEY MATCH, AND CONFIRM THAT NO OTHER USER HAS SAME INFO. THEN DISPLAY A DIALOG THAT SAYS ACCOUNT CREATED */}
 					<Button onClick={handleSubmit} color="primary">
 						Create Account
           </Button>
 					<Button onClick={handleClose} color="primary">
 						Cancel
           </Button>
-
-					{/* MAKE THIS BUTTON HANDLE CREATE ACCOUNT */}
 				</DialogActions>
 			</Dialog>
 		</div>
