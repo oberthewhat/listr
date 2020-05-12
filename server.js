@@ -1,5 +1,6 @@
 const express = require("express");
 const usersRouter = require('./backend/router/users');
+const restaurantRouter = require('./backend/router/restaurants')
 const app = express()
 const port = 8080;
 
@@ -10,6 +11,7 @@ const port = 8080;
 
 app.use(express.json())
 app.use('/', usersRouter)
+app.use('/listings', restaurantRouter )
 
 
 // app.post()

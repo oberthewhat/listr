@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -37,19 +37,94 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-
-
-
 const Listings = (props) => {
+
+var [count, setCount] = useState(0)
+var [restID, setID] = useState('')
+
+
+
+let incrementer = () => {
+	setCount(count + 1)
+}
+
+let decrementer = () => {
+	setCount(count - 1)
+}
+
+	async function voteFetch(e) {
+		
+    
+		let id = e.currentTarget.id
+		console.log("id after click :", id)
+		console.log("target ", e.currentTarget.value)
+		setID(restID = id)
+	
+
+		let targetRest = props.place.filter(restaurant => {
+		return	restaurant.id === id
+		})
+
+    if(targetRest.vote) {
+	  	if(e.currentTarget.value === "upVote") {
+			incrementer()} 
+			  else if(e.currentTarget.value === "downVote") {
+		    decrementer()
+				}
+				let newVoteTotal = {
+					vote_total: count,
+					restaurant_id: restID
+				};
+				console.log("new vote total: ", newVoteTotal)
+		
+				let response = await fetch('http://localhost:8080/listings', {
+					method: "PUT",
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(newVoteTotal)
+				});
+		
+				let result = await response.json();
+	  }
+		
+		if(!targetRest.vote) {
+
+	  	if(e.currentTarget.value === "upVote") {
+			incrementer()		} 
+		  	else if(e.currentTarget.value === "downVote") {
+
+				decrementer()		
+				}
+				let newVoteTotal = {
+					vote_total: count,
+					restaurant_id: restID
+				};
+				console.log("new vote total: ", newVoteTotal)
+		
+				let response = await fetch('http://localhost:8080/listings', {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(newVoteTotal)
+				});
+		
+				let result = await response.json();				
+		}
+
+
+	}
+
 	const classes = useStyles();
 	function getMiles(meters) {
 		return meters * 0.000621371192;
 	}
 
 	function price(priceRange) {
-		if(priceRange === "$$$") {
+		if (priceRange === "$$$") {
 			return "expensive"
-		} else if(priceRange === "$$") {
+		} else if (priceRange === "$$") {
 			return "average"
 		} else {
 			return "cheap"
@@ -57,17 +132,16 @@ const Listings = (props) => {
 	}
 
 	const each = props.place
-	console.log('each', each)
 	return (
 		<div className={classes.root}>
 			{each.map((rest, i) => (
 				<div className='listItem' key={i}>
 					<Box boxShadow={2} className={classes.voter}>
-						<Button >
-							<ArrowUpwardIcon />
+						<Button id={rest.id} value="upVote" onClick={voteFetch}  >
+							<ArrowUpwardIcon/>
 						</Button>
-						<Button>
-							<ArrowDownwardIcon />
+						<Button id={rest.id} value="downVote" onClick={voteFetch} >
+							<ArrowDownwardIcon/>
 						</Button>
 					</Box>
 					<ExpansionPanel className="expansionPanel">
@@ -79,15 +153,15 @@ const Listings = (props) => {
 							<div className="itemHeading">
 								<div className='itemHeadingText'>{rest.name}</div>
 								<div className='itemHeadingText'>{Number(getMiles(rest.distance).toFixed(2))} Miles from you!</div>
-								</div>
+							</div>
 
 						</ExpansionPanelSummary>
 						<ExpansionPanelDetails>
-							<Typography>
-								Phone : {rest.display_phone}
-								Address : {rest.location.display_address[0]} 
-								{rest.location.display_address[1]}
-								Price range : {price(rest.price)}
+							<Typography className="detailsList">
+								<li>Phone : {rest.display_phone}</li>
+								<li>Address : {rest.location.address1}.
+								 {rest.location.city}, {rest.location.state}</li>
+								<li>Price range : {price(rest.price)}</li>
 							</Typography>
 						</ExpansionPanelDetails>
 					</ExpansionPanel>

@@ -5,6 +5,13 @@ export const userLogIn = (username) => {
 	}
 }
 
+export const updateVote = (voteTotal) => {
+	return{
+		type: "VOTER",
+		value: voteTotal
+	}
+} 
+
 export const newUser = (text) => {
 	return {
 		type: "CREATE_USER",
@@ -21,9 +28,7 @@ export const getCoords = (coords) => {
 }
 
 export const getPlace = (lat, lon, type) => {
-	console.log('actions lat', lat)
-	console.log('actions lon', lon)
-	console.log('actions type', type)
+
 
 	const proxy = "https://cors-anywhere.herokuapp.com/"
   const yelpAPI = `https://api.yelp.com/v3/businesses/search?term=${type}&latitude=${lat}&longitude=${lon}&limit=20`
@@ -31,7 +36,7 @@ export const getPlace = (lat, lon, type) => {
 	return (dispatch) => {
 		fetch(proxy + yelpAPI, { 
 			headers: {
-				Authorization: "Bearer mTKaVgSrIJqL2gnul1zTNMBssMeAhJXNXjLDWT7BFwwPqefdbnToL00zIoPsqWd9PubnMaAJ70cYAFjFKcWv5K5Lwqhb_34czjeRarrGwIM8JPFZSWP95U_m85WzXnYx"
+				Authorization: "Bearer p7pqhAhOBOUl2TTVv5dv3wG5aJeF5B88Omtb6vTw_yQv9qT75lLeB_0KnVsG__KXNTBte05YWGixZixSprR1XpLuL4QCuVMhHZ4ydate1TEBdHCpSluwzkBb2ja6XnYx"
 			}
 		})
 			.then(res => res.json()

@@ -8,5 +8,8 @@ export default {
 	coords: {
 		latitude: null,
 		longitude: null
-	}
+	},
+	voteTotal: [
+		
+	]
 }

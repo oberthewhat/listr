@@ -13,14 +13,12 @@ export default function CreateUser() {
 	const [user, setUser] = useState({
 		email: '',
 		username: '',
-		password: '',
-		password2: ''
+		password: ''
 });
 
 function handleChange(e) {
 	const { id, value } = e.target;
 	setUser(user => ({ ...user, [id]: value }));
-	console.log(user)
 }
 
 
@@ -30,8 +28,7 @@ async function handleSubmit (e){
 	let newUser = {
 		email: user.email,
 		username: user.username,
-		password: user.password,
-		password2: user.password2
+		password: user.password
 	};
 	
 	let response = await fetch('http://localhost:8080/', {
@@ -45,7 +42,7 @@ async function handleSubmit (e){
 	let result = await response.json();
 	console.log(result)
 	
-
+ setOpen(false)
 	}
 
 
@@ -96,14 +93,6 @@ async function handleSubmit (e){
 						type="password"
 						autoComplete="current-password"
 						value={user.password}
-						fullWidth
-					/>
-					<TextField
-						id="password2"
-						label="Confirm Password"
-						type="password"
-						autoComplete="current-password"
-						value={user.password2}
 						fullWidth
 					/>
 				</DialogContent>

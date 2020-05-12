@@ -1,6 +1,13 @@
 import { combineReducers } from 'redux'
 
-
+const voter = (state=[], action ) => {
+	switch(action.type) {
+		case 'VOTER':
+			return [action.value]
+			default:
+				return state
+	}
+}
 
 
 const place = (state = [], action) => {
@@ -26,4 +33,4 @@ const coords = (state = [], action) => {
 
 
 
-export default combineReducers({ place, coords })
+export default combineReducers({ place, coords, voter })
