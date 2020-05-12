@@ -65,6 +65,7 @@ let decrementer = () => {
 		return	restaurant.id === id
 		})
 
+	//If the vote exists in the DB
     if(targetRest.vote) {
 	  	if(e.currentTarget.value === "upVote") {
 			incrementer()} 
@@ -86,8 +87,9 @@ let decrementer = () => {
 				});
 		
 				let result = await response.json();
+				console.log(result)
 	  }
-		
+		//If there are no votes in the DB
 		if(!targetRest.vote) {
 
 	  	if(e.currentTarget.value === "upVote") {
@@ -110,7 +112,8 @@ let decrementer = () => {
 					body: JSON.stringify(newVoteTotal)
 				});
 		
-				let result = await response.json();				
+				let postResult = await response.json();	
+				console.log(postResult)			
 		}
 
 

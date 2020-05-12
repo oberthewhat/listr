@@ -11,9 +11,9 @@ let sql = "INSERT INTO UserDB.restaurantVotes (restaurant_id, vote_total) VALUES
 sql = mysql.format(sql, [req.body.restaurant_id, req.body.vote_total])
 
 pool.query(sql, (err, results) => {
-  if (err) return handleSQLError(res, err)
-  return res.status(204).json();
-})
+      if (err) return handleSQLError(res, err);
+      return res.json({ vote_total: results });
+    })
 };
 
 
@@ -25,8 +25,8 @@ const restaurantVoter = (req, res) => {
     sql = mysql.format(sql, [req.body.vote_total, req.body.restaurant_id])
 
     pool.query(sql, (err, results) => {
-      if (err) return handleSQLError(res, err)
-      return res.status(204).json();
+      if (err) return handleSQLError(res, err);
+      return res.json({ vote_total: results });
     })
     }
   
