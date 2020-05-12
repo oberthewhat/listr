@@ -13,4 +13,6 @@ router.post('/', voterController.firstVote )
 
 router.put('/', voterController.restaurantVoter )
 
+router.get('/', voterController.getAllVotes)
+
 module.exports = router

@@ -1,4 +1,5 @@
 const pool = require("../sql/connection")
+const mysql = require("mysql")
 const {handleSQLError} = require("../sql/error")
 
 

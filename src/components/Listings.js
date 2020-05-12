@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, setState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -40,35 +40,35 @@ const useStyles = makeStyles(theme => ({
 const Listings = (props) => {
 
 const classes = useStyles();
+
+///////set up hooks
 var [count, setCount] = useState(0)
 var [restID, setID] = useState('')
 
 
+/////////////////////////////vote fecth 
 
 	async function voteFetch(e) {
-		
-    
+
 		let id = e.currentTarget.id
 		setID(restID = id)
 		
 	let incrementer = () => {
-	setCount(count + 1)
+	setCount(count = targetRest[0].vote + 1)
 }
 
 let decrementer = () => {
-	setCount(count - 1)
+	setCount(count = targetRest[0].vote - 1)
 }
 
+
+/////////////filter out only the places where the ID matches the one clicked
 		let targetRest = props.place.filter(restaurant => {
     return	restaurant.id === id
 
 		})
-		console.log("target rest after filter " , targetRest[0].id)
 
-	
-	//If the vote exists in the DB
-	console.log('before if statement', targetRest)
-	console.log('target rest before if statement', targetRest)
+	//If the vote exists in the DB This needds to be tied to the DB fetch rather than targetRest otherwise it starts a duplicate
 
     if(targetRest[0].vote) {
 	  	if(e.currentTarget.value === "upVote" && e.currentTarget.id === targetRest[0].id) {
@@ -78,7 +78,7 @@ let decrementer = () => {
 		} 
 			  else if(e.currentTarget.value === "downVote" && e.currentTarget.id === targetRest[0].id) {
 				decrementer()
-				Object.assign(targetRest[0], {"vote":	count})
+				Object.assign(targetRest[0], {"vote": count})
 				console.log("vote does exist downvote pressed",targetRest[0].id,"has :", targetRest[0].vote)
 
 				}
@@ -86,7 +86,6 @@ let decrementer = () => {
 					vote_total: count,
 					restaurant_id: restID
 				};
-				console.log("new vote total: ", newVoteTotal)
 		
 				let response = await fetch('http://localhost:8080/listings', {
 					method: "PUT",
@@ -136,12 +135,13 @@ let decrementer = () => {
 
 	}
 
-
-
+/////////get miles for details
 
 	function getMiles(meters) {
 		return meters * 0.000621371192;
 	}
+
+//////////get price range for details
 
 	function price(priceRange) {
 		if (priceRange === "$$$") {
@@ -153,7 +153,12 @@ let decrementer = () => {
 		}
 	}
 
+
+/////////bring in props from fetch action
 	const each = props.place
+
+
+
 	return (
 		<div className={classes.root}>
 			{each.map((rest, i) => (

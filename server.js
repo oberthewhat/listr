@@ -1,8 +1,9 @@
 const express = require("express");
+var bodyParser =require("body-parser")
 const usersRouter = require('./backend/router/users');
 const restaurantRouter = require('./backend/router/restaurants')
 const app = express()
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 // app.use((req, res, next) => {
 //   //authorization logic would go here

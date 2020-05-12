@@ -29,10 +29,24 @@ const restaurantVoter = (req, res) => {
       return res.json({ vote_total: results });
     })
     }
+
+
+const getAllVotes = (req, res) => {
+
+  let sql = "SELECT * FROM UserDB.restaurantVotes";
+  let sqlInput = ["*", "UserDB.restaurantVotes"]
+  sql = mysql.format(sql, sqlInput)
+
+  pool.query(sql, (err, rows) => {
+    if (err) return handleSQLError(res,err);
+    return res.json(rows)
+  })
+} 
   
 
 
 module.exports = {
   restaurantVoter,
-  firstVote
+  firstVote,
+  getAllVotes
 };
