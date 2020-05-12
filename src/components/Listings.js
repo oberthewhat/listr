@@ -39,12 +39,19 @@ const useStyles = makeStyles(theme => ({
 
 const Listings = (props) => {
 
+const classes = useStyles();
 var [count, setCount] = useState(0)
 var [restID, setID] = useState('')
 
 
 
-let incrementer = () => {
+	async function voteFetch(e) {
+		
+    
+		let id = e.currentTarget.id
+		setID(restID = id)
+		
+	let incrementer = () => {
 	setCount(count + 1)
 }
 
@@ -52,25 +59,28 @@ let decrementer = () => {
 	setCount(count - 1)
 }
 
-	async function voteFetch(e) {
-		
-    
-		let id = e.currentTarget.id
-		console.log("id after click :", id)
-		console.log("target ", e.currentTarget.value)
-		setID(restID = id)
-	
-
 		let targetRest = props.place.filter(restaurant => {
-		return	restaurant.id === id
-		})
+    return	restaurant.id === id
 
+		})
+		console.log("target rest after filter " , targetRest[0].id)
+
+	
 	//If the vote exists in the DB
-    if(targetRest.vote) {
-	  	if(e.currentTarget.value === "upVote") {
-			incrementer()} 
-			  else if(e.currentTarget.value === "downVote") {
-		    decrementer()
+	console.log('before if statement', targetRest)
+	console.log('target rest before if statement', targetRest)
+
+    if(targetRest[0].vote) {
+	  	if(e.currentTarget.value === "upVote" && e.currentTarget.id === targetRest[0].id) {
+			incrementer()
+			Object.assign(targetRest[0], {"vote": count})
+			console.log("vote does exist upvote pressed",targetRest[0].id,"has :", targetRest[0].vote)
+		} 
+			  else if(e.currentTarget.value === "downVote" && e.currentTarget.id === targetRest[0].id) {
+				decrementer()
+				Object.assign(targetRest[0], {"vote":	count})
+				console.log("vote does exist downvote pressed",targetRest[0].id,"has :", targetRest[0].vote)
+
 				}
 				let newVoteTotal = {
 					vote_total: count,
@@ -88,15 +98,22 @@ let decrementer = () => {
 		
 				let result = await response.json();
 				console.log(result)
-	  }
+		}
+		
+
 		//If there are no votes in the DB
-		if(!targetRest.vote) {
+		if(!targetRest[0].vote) {
 
 	  	if(e.currentTarget.value === "upVote") {
-			incrementer()		} 
+			incrementer()	
+			Object.assign(targetRest[0], {"vote": 1})
+			console.log("NO VOTE EXISTS upvote pressed",targetRest[0].id,"has :", targetRest[0].vote)
+		} 
 		  	else if(e.currentTarget.value === "downVote") {
 
-				decrementer()		
+				decrementer()	
+				Object.assign(targetRest[0], {"vote": -1})
+				console.log("NO VOTE EXISTS downvote pressed",targetRest[0].id,"has :", targetRest[0].vote)
 				}
 				let newVoteTotal = {
 					vote_total: count,
@@ -112,14 +129,16 @@ let decrementer = () => {
 					body: JSON.stringify(newVoteTotal)
 				});
 		
-				let postResult = await response.json();	
-				console.log(postResult)			
+				let result = await response.json();	
+				console.log(result)			
 		}
 
 
 	}
 
-	const classes = useStyles();
+
+
+
 	function getMiles(meters) {
 		return meters * 0.000621371192;
 	}

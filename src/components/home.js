@@ -41,7 +41,6 @@ class Home extends Component {
 	}
 
 	getCoordinates(position) {
-		console.log(position.coords)
 		document.cookie="latitude="+position.coords.latitude;
 		document.cookie="longitude="+position.coords.longitude; 
 		this.setState({
@@ -52,7 +51,6 @@ class Home extends Component {
 			lat: this.state.latitude,
 			lon: this.state.longitude
 		}
-		console.log("home component", userCords)
 	}
 
 handleLocationError(error) {
