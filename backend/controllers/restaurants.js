@@ -39,6 +39,7 @@ const getAllVotes = (req, res) => {
 
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res,err);
+    console.log(rows)
     return res.json(rows)
   })
 } 

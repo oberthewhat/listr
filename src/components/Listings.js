@@ -1,4 +1,4 @@
-import React, { useState, setState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -9,6 +9,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Button from '@material-ui/core/button'
 import Box from '@material-ui/core/Box';
+import axios from "axios"
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -39,14 +40,30 @@ const useStyles = makeStyles(theme => ({
 
 const Listings = (props) => {
 
+
+
 const classes = useStyles();
 
 ///////set up hooks
 var [count, setCount] = useState(0)
 var [restID, setID] = useState('')
+const [data, setData] = useState({ hits: [] });
+ 
+useEffect(() => {
+	const fetchData = async () => {
+		const result = await axios(
+			'http://localhost:8080/listings',
+		);
 
+		setData(result.data);
+	};
 
-/////////////////////////////vote fecth 
+	fetchData();
+}, []);
+
+console.log(data)
+
+/////////////////////////////vote fecth when vote button is clicked
 
 	async function voteFetch(e) {
 
@@ -155,9 +172,33 @@ let decrementer = () => {
 
 
 /////////bring in props from fetch action
+//each = YELP API
 	const each = props.place
+	console.log(data)
+	each.map(restaurant => {
+		for(let i = 0; i < data.length; i++) {
+			if(restaurant.id === data[i].restaurant_id) {
+				restaurant.votes = data[i].vote_total
+			}	
+		}
+	})
 
+	function compare(a,b){
+		const restA = a.votes;
+		const restB = b.votes;
 
+		let comparison = 0;
+		if(restA > restB){
+		comparison = -1;
+		} else if (restA < restB){
+		comparison = 1
+		}
+		return comparison
+		}
+
+		each.sort(compare)
+
+		console.log("sorted ",each)
 
 	return (
 		<div className={classes.root}>
