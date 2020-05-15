@@ -44,7 +44,7 @@ const Listings = (props) => {
 
 
 	let yelpPlaces = props.place.map(d => {
-		return Object.assign(d, { vote : 0 })
+		return Object.assign(d, { vote: 0 })
 
 	})
 
@@ -54,9 +54,8 @@ const Listings = (props) => {
 	const [data, setData] = useState();
 
 	console.log("Places from yelp with 0 vote added to object", yelpPlaces)
-
-	useEffect(() => {
-		const fetchData = async () => {
+	
+	const fetchData = async () => {
 			const result = await axios(
 				'http://localhost:8080/listings',
 			);
@@ -64,9 +63,9 @@ const Listings = (props) => {
 			setData(result.data);
 		};
 
-		fetchData();
+	useEffect(() => {
+	fetchData();
 	}, []);
-
 
 	const voteFetch = async function (newVoteTotal, fetchType) {
 
@@ -82,32 +81,60 @@ const Listings = (props) => {
 		console.log("fetch result", result)
 	}
 
-///////////////////          VOTE BUTTON HANDLER        //////////////
+	///////////////////          VOTE BUTTON HANDLER        //////////////
 
 
 	async function handleVoteButton(e) {
 		console.log("data from voted fetch on click ", data)
 
-				let id = e.currentTarget.id
+		let id = e.currentTarget.id
 		setID(restID = id)
 
 		let targetRest = data.filter(restaurant => {
-			return restaurant.restaurant_id === id
+			if (restaurant.restaurant_id === id) {
+				return restaurant.restaurant_id
+			}
+			else {
+				return false
+			}
 		})
 
 		let incrementer = () => {
 			setCount(count = targetRest[0].vote_total + 1)
 			console.log(targetRest)
 		}
-		
+
 		let decrementer = () => {
 			setCount(count = targetRest[0].vote_total - 1)
 		}
 
-console.log("yelp places", yelpPlaces)
-console.log("target Rest", targetRest[0])
+		console.log("yelp places", yelpPlaces)
+		console.log("target Rest", data)
 
-////////////////    OLD VOTE     /////////////////////////
+
+		//////////  NEW VOTE   /////////////////
+		if (targetRest.length == 0) {
+			console.log(e.currentTarget.id)
+			if (e.currentTarget.value === "upVote") {
+				console.log("Count after upvote Pressed on new vote ", count)
+				setCount(count = 1)
+			}
+			else if (e.currentTarget.value === "downVote") {
+				setCount(count = -1)
+			}
+			let newVoteTotal = {
+				vote_total: count,
+				restaurant_id: e.currentTarget.id
+			};
+			console.log("newVoteTotal", newVoteTotal)
+			voteFetch(newVoteTotal, "POST")
+			fetchData()
+			return;
+		}
+
+		////////////////    OLD VOTE     /////////////////////////
+
+
 		if (targetRest[0].restaurant_id) {
 			if (e.currentTarget.value === "upVote") {
 				console.log('old vote upvote pressed')
@@ -122,28 +149,10 @@ console.log("target Rest", targetRest[0])
 				vote_total: count,
 				restaurant_id: restID
 			};
-			console.log("oldVoteTOtal", newVoteTotal)
+			console.log("oldVoteTotal", newVoteTotal)
 			voteFetch(newVoteTotal, "PUT")
 		}
-//////////  NEW VOTE   /////////////////
- 
-		if (yelpPlaces.vote === 0) {
-			if (e.currentTarget.value === "upVote") {
-				console.log("Count after upvote Pressed on new vote ",count)
-				incrementer()
-				yelpPlaces.vote = 1
-			}
-			else if (e.currentTarget.value === "downVote") {
-				decrementer()
-				yelpPlaces.vote = count - 1
-			}
-			let newVoteTotal = {
-				vote_total: count,
-				restaurant_id: restID
-			};
-			console.log("newVoteTotal", newVoteTotal)
-			voteFetch(newVoteTotal, "POST")
-		}
+
 
 	}
 
@@ -191,7 +200,7 @@ console.log("target Rest", targetRest[0])
 
 
 	yelpPlaces.sort(compare)
-/////////////////////////////        RETURN    ///////////////////////////////////////////
+	/////////////////////////////        RETURN    ///////////////////////////////////////////
 	return (
 		<div className={classes.root}>
 			{yelpPlaces.map((rest, i) => (
