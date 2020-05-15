@@ -10,3 +10,23 @@ let decrementer = (e) => {
 	setCount(count - 1)
 	console.log(e.currentTarget.value)
 }
+
+
+# [START runtime]
+runtime: nodejs
+env: flex
+# [END runtime]
+
+# [START handlers]
+handlers:
+- url: /
+  static_files: build/index.html
+  upload: build/index.html
+- url: /
+  static_dir: build
+  http_headers:
+    Access-Control-Allow-Origin: "*"
+- url: /.*
+  script: auto
+  secure: always
+# [END handlers]
