@@ -1,3 +1,4 @@
+
 export const userLogIn = (username) => {
 	return {
 		type: "LOGIN",
@@ -6,11 +7,11 @@ export const userLogIn = (username) => {
 }
 
 export const updateVote = (voteTotal) => {
-	return{
+	return {
 		type: "VOTER",
 		value: voteTotal
 	}
-} 
+}
 
 export const newUser = (text) => {
 	return {
@@ -30,13 +31,14 @@ export const getCoords = (coords) => {
 export const getPlace = (lat, lon, type) => {
 
 
-	const proxy = "https://cors-anywhere.herokuapp.com/"
-  const yelpAPI = `https://api.yelp.com/v3/businesses/search?term=${type}&latitude=${lat}&longitude=${lon}&limit=20`
+	const apiKey = "p7pqhAhOBOUl2TTVv5dv3wG5aJeF5B88Omtb6vTw_yQv9qT75lLeB_0KnVsG__KXNTBte05YWGixZixSprR1XpLuL4QCuVMhHZ4ydate1TEBdHCpSluwzkBb2ja6XnYx"
+	const proxy = "http://127.0.0.1:8080/"
+	const yelp = `https://api.yelp.com/v3/businesses/search?term=${type}&latitude=${lat}&longitude=${lon}&limit=20`
 
 	return (dispatch) => {
-		fetch(proxy + yelpAPI, { 
+		fetch(proxy + yelp, { 
 			headers: {
-				Authorization: "Bearer p7pqhAhOBOUl2TTVv5dv3wG5aJeF5B88Omtb6vTw_yQv9qT75lLeB_0KnVsG__KXNTBte05YWGixZixSprR1XpLuL4QCuVMhHZ4ydate1TEBdHCpSluwzkBb2ja6XnYx"
+				Authorization: `Bearer ${apiKey}`
 			}
 		})
 			.then(res => res.json()

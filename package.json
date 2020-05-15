@@ -13,6 +13,7 @@
     "concurrently": "^5.2.0",
     "contentful": "^7.14.0",
     "cookie": "^0.4.0",
+    "cors-anywhere": "^0.4.3",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
@@ -28,12 +29,15 @@
     "react-tooltip": "^4.2.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^5.21.8"
+    "sequelize": "^5.21.8",
+    "yelp-fusion": "^3.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve -s build",
+    "prestart": "npm install -g serve",
+    "local": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "nodemon server",
     "dev": " concurrently \"nodemon server\" \"react-scripts start\" "
@@ -58,6 +62,5 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
     "http-proxy-middleware": "^1.0.3"
-  },
-  "proxy": "http://localhost:4001"
+  }
 }

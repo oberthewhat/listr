@@ -47,10 +47,6 @@ class Home extends Component {
 			latitude: position.coords.latitude,
 			longitude: position.coords.longitude,
 		})
-		const userCords = {
-			lat: this.state.latitude,
-			lon: this.state.longitude
-		}
 	}
 
 handleLocationError(error) {

@@ -43,11 +43,12 @@ const Listings = (props) => {
 
 
 const classes = useStyles();
-
 ///////set up hooks
+
 var [count, setCount] = useState(0)
 var [restID, setID] = useState('')
 const [data, setData] = useState({ hits: [] });
+
  
 useEffect(() => {
 	const fetchData = async () => {
@@ -57,13 +58,13 @@ useEffect(() => {
 
 		setData(result.data);
 	};
-
+ 
 	fetchData();
-}, []);
-
-console.log(data)
-
-/////////////////////////////vote fecth when vote button is clicked
+	 }, []);
+	 
+	 console.log("data after fetch ",data)
+	
+	/////////////////////////////vote fecth when vote button is clicked
 
 	async function voteFetch(e) {
 
@@ -103,7 +104,6 @@ let decrementer = () => {
 					vote_total: count,
 					restaurant_id: restID
 				};
-		
 				let response = await fetch('http://localhost:8080/listings', {
 					method: "PUT",
 					headers: {
@@ -135,7 +135,7 @@ let decrementer = () => {
 					vote_total: count,
 					restaurant_id: restID
 				};
-				console.log("new vote total: ", newVoteTotal)
+				console.log("new vote total if no vote existed: ", newVoteTotal)
 		
 				let response = await fetch('http://localhost:8080/listings', {
 					method: "POST",
@@ -182,10 +182,14 @@ let decrementer = () => {
 			}	
 		}
 	})
+	console.log(each)
+	console.log(data)
 
 	function compare(a,b){
 		const restA = a.votes;
 		const restB = b.votes;
+		console.log('restA' ,restA)
+		console.log('restB' ,restB)
 
 		let comparison = 0;
 		if(restA > restB){
@@ -193,14 +197,16 @@ let decrementer = () => {
 		} else if (restA < restB){
 		comparison = 1
 		}
+		console.log('comparison', comparison)
 		return comparison
 		}
+		
 
 		each.sort(compare)
 
-		console.log("sorted ",each)
-
-	return (
+		console.log("sorted ", each)
+		console.log("this should be vote data ", data)
+		return (
 		<div className={classes.root}>
 			{each.map((rest, i) => (
 				<div className='listItem' key={i}>
