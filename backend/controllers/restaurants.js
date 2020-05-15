@@ -2,10 +2,17 @@ const pool = require("../sql/connection")
 const mysql = require('mysql')
 const {handleSQLError} = require("../sql/error")
 
+////////////////    INSERT NEW VOTE TO DB      /////////////////////
+
+//copied language from mysql
+
+// INSERT INTO `UserDB`.`restaurantVotes` (`restaurant_id`, `vote_total`) VALUES ('T2mLmDKNxrMd5Y0iXWFsXw', '1');
+
+
 
 const firstVote = (req, res) => {
-console.log("vote total ", req.body.vote_total)
-console.log("id: ", req.body.restaurant_id)
+console.log("POST FUNCTION vote total ", req.body.vote_total)
+console.log("POST FUNCTION id: ", req.body.restaurant_id)
 
 let sql = "INSERT INTO UserDB.restaurantVotes (restaurant_id, vote_total) VALUES (?, ?)";
 sql = mysql.format(sql, [req.body.restaurant_id, req.body.vote_total])
@@ -17,7 +24,7 @@ pool.query(sql, (err, results) => {
 };
 
 
-//UPDATE `UserDB`.`restaurantVotes` SET `vote_total` = '3' WHERE (`restaurant_id` = 'abcd12345');
+////////////////     UPDATE VOTE INTO DB         ///////////////////
 
 const restaurantVoter = (req, res) => {
     
@@ -29,6 +36,9 @@ const restaurantVoter = (req, res) => {
       return res.json({ vote_total: results });
     })
     }
+
+
+////////////////     GET CURRENT STORED VOTES      ////////////////  
 
 
 const getAllVotes = (req, res) => {

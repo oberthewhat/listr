@@ -30,3 +30,13 @@ handlers:
   script: auto
   secure: always
 # [END handlers]
+
+
+
+	let incrementer = () => {
+	setCount(count = targetRest[0].vote + 1)
+}
+
+let decrementer = () => {
+	setCount(count = targetRest[0].vote - 1)
+}

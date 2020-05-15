@@ -40,125 +40,120 @@ const useStyles = makeStyles(theme => ({
 
 const Listings = (props) => {
 
+	const classes = useStyles();
 
 
-const classes = useStyles();
-///////set up hooks
+	let yelpPlaces = props.place.map(d => {
+		return Object.assign(d, { vote : 0 })
 
-var [count, setCount] = useState(0)
-var [restID, setID] = useState('')
-const [data, setData] = useState({ hits: [] });
+	})
 
- 
-useEffect(() => {
-	const fetchData = async () => {
-		const result = await axios(
-			'http://localhost:8080/listings',
-		);
 
-		setData(result.data);
-	};
- 
-	fetchData();
-	 }, []);
-	 
-	 console.log("data after fetch ",data)
-	
-	/////////////////////////////vote fecth when vote button is clicked
+	var [count, setCount] = useState(0)
+	var [restID, setID] = useState('')
+	const [data, setData] = useState();
 
-	async function voteFetch(e) {
+	console.log("Places from yelp with 0 vote added to object", yelpPlaces)
 
-		let id = e.currentTarget.id
+	useEffect(() => {
+		const fetchData = async () => {
+			const result = await axios(
+				'http://localhost:8080/listings',
+			);
+
+			setData(result.data);
+		};
+
+		fetchData();
+	}, []);
+
+
+	const voteFetch = async function (newVoteTotal, fetchType) {
+
+		let response = await fetch('http://localhost:8080/listings', {
+			method: fetchType,
+			headers: {
+				'Content-Type': 'application/json',
+				'accept': 'appllication/json'
+			},
+			body: JSON.stringify(newVoteTotal)
+		});
+		let result = await response.json();
+		console.log("fetch result", result)
+	}
+
+///////////////////          VOTE BUTTON HANDLER        //////////////
+
+
+	async function handleVoteButton(e) {
+		console.log("data from voted fetch on click ", data)
+
+				let id = e.currentTarget.id
 		setID(restID = id)
-		
-	let incrementer = () => {
-	setCount(count = targetRest[0].vote + 1)
-}
 
-let decrementer = () => {
-	setCount(count = targetRest[0].vote - 1)
-}
-
-
-/////////////filter out only the places where the ID matches the one clicked
-		let targetRest = props.place.filter(restaurant => {
-    return	restaurant.id === id
-
+		let targetRest = data.filter(restaurant => {
+			return restaurant.restaurant_id === id
 		})
 
-	//If the vote exists in the DB This needds to be tied to the DB fetch rather than targetRest otherwise it starts a duplicate
+		let incrementer = () => {
+			setCount(count = targetRest[0].vote_total + 1)
+			console.log(targetRest)
+		}
+		
+		let decrementer = () => {
+			setCount(count = targetRest[0].vote_total - 1)
+		}
 
-    if(targetRest[0].vote) {
-	  	if(e.currentTarget.value === "upVote" && e.currentTarget.id === targetRest[0].id) {
-			incrementer()
-			Object.assign(targetRest[0], {"vote": count})
-			console.log("vote does exist upvote pressed",targetRest[0].id,"has :", targetRest[0].vote)
-		} 
-			  else if(e.currentTarget.value === "downVote" && e.currentTarget.id === targetRest[0].id) {
+console.log("yelp places", yelpPlaces)
+console.log("target Rest", targetRest[0])
+
+////////////////    OLD VOTE     /////////////////////////
+		if (targetRest[0].restaurant_id) {
+			if (e.currentTarget.value === "upVote") {
+				console.log('old vote upvote pressed')
+				incrementer()
+				targetRest[0].vote_total = count
+			}
+			else if (e.currentTarget.value === "downVote") {
 				decrementer()
-				Object.assign(targetRest[0], {"vote": count})
-				console.log("vote does exist downvote pressed",targetRest[0].id,"has :", targetRest[0].vote)
-
-				}
-				let newVoteTotal = {
-					vote_total: count,
-					restaurant_id: restID
-				};
-				let response = await fetch('http://localhost:8080/listings', {
-					method: "PUT",
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(newVoteTotal)
-				});
-		
-				let result = await response.json();
-				console.log(result)
+				targetRest[0].vote_total = count
+			}
+			let newVoteTotal = {
+				vote_total: count,
+				restaurant_id: restID
+			};
+			console.log("oldVoteTOtal", newVoteTotal)
+			voteFetch(newVoteTotal, "PUT")
 		}
-		
-
-		//If there are no votes in the DB
-		if(!targetRest[0].vote) {
-
-	  	if(e.currentTarget.value === "upVote") {
-			incrementer()	
-			Object.assign(targetRest[0], {"vote": 1})
-			console.log("NO VOTE EXISTS upvote pressed",targetRest[0].id,"has :", targetRest[0].vote)
-		} 
-		  	else if(e.currentTarget.value === "downVote") {
-
-				decrementer()	
-				Object.assign(targetRest[0], {"vote": -1})
-				console.log("NO VOTE EXISTS downvote pressed",targetRest[0].id,"has :", targetRest[0].vote)
-				}
-				let newVoteTotal = {
-					vote_total: count,
-					restaurant_id: restID
-				};
-				console.log("new vote total if no vote existed: ", newVoteTotal)
-		
-				let response = await fetch('http://localhost:8080/listings', {
-					method: "POST",
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(newVoteTotal)
-				});
-		
-				let result = await response.json();	
-				console.log(result)			
+//////////  NEW VOTE   /////////////////
+ 
+		if (yelpPlaces.vote === 0) {
+			if (e.currentTarget.value === "upVote") {
+				console.log("Count after upvote Pressed on new vote ",count)
+				incrementer()
+				yelpPlaces.vote = 1
+			}
+			else if (e.currentTarget.value === "downVote") {
+				decrementer()
+				yelpPlaces.vote = count - 1
+			}
+			let newVoteTotal = {
+				vote_total: count,
+				restaurant_id: restID
+			};
+			console.log("newVoteTotal", newVoteTotal)
+			voteFetch(newVoteTotal, "POST")
 		}
-
 
 	}
 
-/////////get miles for details
+	/////////        get miles for details        //////////////////////////////
 
 	function getMiles(meters) {
 		return meters * 0.000621371192;
 	}
 
-//////////get price range for details
+	/////////////      get price range for details      ////////////////////////
 
 	function price(priceRange) {
 		if (priceRange === "$$$") {
@@ -171,51 +166,42 @@ let decrementer = () => {
 	}
 
 
-/////////bring in props from fetch action
-//each = YELP API
-	const each = props.place
-	console.log(data)
-	each.map(restaurant => {
-		for(let i = 0; i < data.length; i++) {
-			if(restaurant.id === data[i].restaurant_id) {
-				restaurant.votes = data[i].vote_total
-			}	
+	/////////   SORT FOR LIST RENDER BASED ON VOTES    ////////////////////
+
+	yelpPlaces.map(restaurant => {
+		for (let i = 0; i < data.length; i++) {
+			if (restaurant.id === data[i].restaurant_id) {
+				return restaurant.vote = data[i].vote_total
+			}
 		}
 	})
-	console.log(each)
-	console.log(data)
 
-	function compare(a,b){
-		const restA = a.votes;
-		const restB = b.votes;
-		console.log('restA' ,restA)
-		console.log('restB' ,restB)
+	function compare(a, b) {
+		const restA = a.vote;
+		const restB = b.vote;
 
 		let comparison = 0;
-		if(restA > restB){
-		comparison = -1;
-		} else if (restA < restB){
-		comparison = 1
+		if (restA > restB) {
+			comparison = -1;
+		} else if (restA < restB) {
+			comparison = 1
 		}
-		console.log('comparison', comparison)
 		return comparison
-		}
-		
+	}
 
-		each.sort(compare)
 
-		console.log("sorted ", each)
-		console.log("this should be vote data ", data)
-		return (
+	yelpPlaces.sort(compare)
+/////////////////////////////        RETURN    ///////////////////////////////////////////
+	return (
 		<div className={classes.root}>
-			{each.map((rest, i) => (
+			{yelpPlaces.map((rest, i) => (
 				<div className='listItem' key={i}>
 					<Box boxShadow={2} className={classes.voter}>
-						<Button id={rest.id} value="upVote" onClick={voteFetch}  >
-							<ArrowUpwardIcon/>
+						<Button id={rest.id} value="upVote" onClick={handleVoteButton}  >
+							<ArrowUpwardIcon />
 						</Button>
-						<Button id={rest.id} value="downVote" onClick={voteFetch} >
-							<ArrowDownwardIcon/>
+						<Button id={rest.id} value="downVote" onClick={handleVoteButton} >
+							<ArrowDownwardIcon />
 						</Button>
 					</Box>
 					<ExpansionPanel className="expansionPanel">
@@ -226,6 +212,7 @@ let decrementer = () => {
 						>
 							<div className="itemHeading">
 								<div className='itemHeadingText'>{rest.name}</div>
+								<div className='itemHeadingText'>Listr Score: {rest.vote}</div>
 								<div className='itemHeadingText'>{Number(getMiles(rest.distance).toFixed(2))} Miles from you!</div>
 							</div>
 

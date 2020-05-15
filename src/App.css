@@ -60,10 +60,11 @@
 }
 
 .itemHeading {
-  display: flex;
+  display: grid;
+  grid-template-columns: 40% 30% 30%;
   width: 100%;
-  justify-content: space-between;
   font-size: 15px;
+  text-shadow: 1px 1px 1px rgba(131, 131, 131, 0.294);
 
 }
 
