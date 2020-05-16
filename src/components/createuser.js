@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 
-export default function CreateUser() {
+export default function CreateUser(props) {
 
   const [open, setOpen] = useState(false);
 	const [user, setUser] = useState({
@@ -31,7 +31,7 @@ async function handleSubmit (e){
 		username: user.username,
 		password: user.password
 	};
-	
+
 	let response = await fetch('http://localhost:8080/', {
 		method: 'POST',
 		headers: {

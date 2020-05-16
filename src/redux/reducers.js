@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 
-const voter = (state=[], action ) => {
+const logStatus = (state = false, action) => {
 	switch(action.type) {
-		case 'VOTER':
+		case 'LOGGED_IN':
 			return [action.value]
 			default:
-				return state
+			return state
 	}
 }
 
@@ -32,4 +32,4 @@ const coords = (state = [], action) => {
 
 
 
-export default combineReducers({ place, coords, voter })
+export default combineReducers({ place, coords, logStatus })

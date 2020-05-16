@@ -1,5 +1,7 @@
 const express = require('express')
 const voterController = require('../controllers/restaurants')
+const authController = require('../controllers/auth')
+const usersController = require('../controllers/users')
 const router = express.Router()
 
 router.use(function(req, res, next) {
@@ -14,5 +16,10 @@ router.post('/', voterController.firstVote )
 router.put('/', voterController.restaurantVoter )
 
 router.get('/', voterController.getAllVotes)
+
+router.post('/login', authController.login)
+
+router.post('/', usersController.createUser)
+
 
 module.exports = router

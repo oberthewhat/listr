@@ -15,6 +15,7 @@ import {
 import { BsEggFried } from "react-icons/bs";
 import { Link } from 'react-router-dom'
 import ReactTooltip from "react-tooltip";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Home extends Component {
 
@@ -71,7 +72,10 @@ handleLocationError(error) {
 
 	render() {
 		if(this.state.latitude == null){
-			return <div className='conditionalLoading'>Loading!!!</div>
+			return (
+				<div className="loadingDiv">
+				<CircularProgress className="progress" />
+				</div>)
 		} else
 	return (
 			<div className='homeBody'>

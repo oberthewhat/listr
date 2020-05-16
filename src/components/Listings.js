@@ -10,6 +10,7 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import axios from "axios"
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -35,14 +36,17 @@ const useStyles = makeStyles(theme => ({
 	paperGrid: {
 		display: 'flex',
 		justifyContent: 'center'
-	}
+	},
+
 }));
 
 const Listings = (props) => {
 
-	const classes = useStyles();
 
-	let yelpPlaces = props.place.map(d => {
+	const classes = useStyles();
+	let yelpPlaces = []
+
+	yelpPlaces = props.place.map(d => {
 		return Object.assign(d, { vote: 0 })
 
 	})
@@ -50,18 +54,18 @@ const Listings = (props) => {
 
 	var [count, setCount] = useState(0)
 	var [restID, setID] = useState('')
-	const [data, setData] = useState();
+	const [data, setData] = useState([]);
 
 	const fetchData = async () => {
-			const result = await axios(
-				'http://localhost:8080/listings',
-			);
+		const result = await axios(
+			'http://localhost:8080/listings',
+		);
 
-			setData(result.data);
-		};
+		setData(result.data);
+	};
 
 	useEffect(() => {
-	fetchData();
+		fetchData();
 	}, []);
 
 	const voteFetch = async function (newVoteTotal, fetchType) {
@@ -70,7 +74,7 @@ const Listings = (props) => {
 			method: fetchType,
 			headers: {
 				'Content-Type': 'application/json',
-				'accept': 'appllication/json'
+				'accept': 'application/json'
 			},
 			body: JSON.stringify(newVoteTotal)
 		});
@@ -82,7 +86,6 @@ const Listings = (props) => {
 
 
 	async function handleVoteButton(e) {
-		console.log("data from voted fetch on click ", data)
 
 		let id = e.currentTarget.id
 		setID(restID = id)
@@ -98,20 +101,16 @@ const Listings = (props) => {
 
 		let incrementer = () => {
 			setCount(count = targetRest[0].vote_total + 1)
-			console.log(targetRest)
 		}
 
 		let decrementer = () => {
 			setCount(count = targetRest[0].vote_total - 1)
 		}
-		console.log("target Rest", data)
-
 
 		//////////  NEW VOTE   /////////////////
 		if (targetRest.length == 0) {
 			console.log(e.currentTarget.id)
 			if (e.currentTarget.value === "upVote") {
-				console.log("Count after upvote Pressed on new vote ", count)
 				setCount(count = 1)
 			}
 			else if (e.currentTarget.value === "downVote") {
@@ -121,7 +120,6 @@ const Listings = (props) => {
 				vote_total: count,
 				restaurant_id: e.currentTarget.id
 			};
-			console.log("newVoteTotal", newVoteTotal)
 			voteFetch(newVoteTotal, "POST")
 			fetchData()
 			return;
@@ -132,7 +130,6 @@ const Listings = (props) => {
 
 		if (targetRest[0].restaurant_id) {
 			if (e.currentTarget.value === "upVote") {
-				console.log('old vote upvote pressed')
 				incrementer()
 				targetRest[0].vote_total = count
 			}
@@ -144,7 +141,6 @@ const Listings = (props) => {
 				vote_total: count,
 				restaurant_id: restID
 			};
-			console.log("oldVoteTotal", newVoteTotal)
 			voteFetch(newVoteTotal, "PUT")
 		}
 
@@ -173,9 +169,13 @@ const Listings = (props) => {
 	/////////   SORT FOR LIST RENDER BASED ON VOTES    ////////////////////
 
 	yelpPlaces.map(restaurant => {
-		for (let i = 0; i < data.length; i++) {
-			if (restaurant.id === data[i].restaurant_id) {
-				return restaurant.vote = data[i].vote_total
+		if (yelpPlaces.length === 0) {
+			console.log("empty")
+		} else {
+			for (let i = 0; i < data.length; i++) {
+				if (restaurant.id === data[i].restaurant_id) {
+					return restaurant.vote = data[i].vote_total
+				}
 			}
 		}
 	})
@@ -197,51 +197,56 @@ const Listings = (props) => {
 	yelpPlaces.sort(compare)
 	/////////////////////////////        RETURN    ///////////////////////////////////////////
 
-
-	if(props.place.length == 0) {
-    return <div></div>
+	if (yelpPlaces.length === 0) {
+		return (
+			<div className="loadingDiv">
+				<CircularProgress className="progress" color="inherit" />
+			</div>)
 	} else {
-	return (
-		<div className={classes.root}>
-			{yelpPlaces.map((rest, i) => (
-				<div className='listItem' key={i}>
-					<Box boxShadow={2} className={classes.voter}>
-						<Button id={rest.id} value="upVote" onClick={handleVoteButton}  >
-							<ArrowUpwardIcon />
-						</Button>
-						<Button id={rest.id} value="downVote" onClick={handleVoteButton} >
-							<ArrowDownwardIcon />
-						</Button>
-					</Box>
-					<ExpansionPanel className="expansionPanel">
-						<ExpansionPanelSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="panel1a-content"
-							id="panel1a-header"
-						>
-							<div className="itemHeading">
-								<div className='itemHeadingText'>{rest.name}</div>
-								<div className='itemHeadingText'>Listr Score: {rest.vote}</div>
-								<div className='itemHeadingText'>{Number(getMiles(rest.distance).toFixed(2))} Miles from you!</div>
-							</div>
+		return (
+			<div className={classes.root}>
+				{console.log("data : ", data),
+					console.log("yelpPlaces : ", yelpPlaces)}
+				{yelpPlaces.map((rest, i) => (
+					<div className='listItem' key={i}>
+						<Box boxShadow={2} className={classes.voter}>
+							<Button id={rest.id} value="upVote" onClick={handleVoteButton}  >
+								<ArrowUpwardIcon />
+							</Button>
+							<Button id={rest.id} value="downVote" onClick={handleVoteButton} >
+								<ArrowDownwardIcon />
+							</Button>
+						</Box>
+						<ExpansionPanel className="expansionPanel">
+							<ExpansionPanelSummary
+								expandIcon={<ExpandMoreIcon />}
+								aria-controls="panel1a-content"
+								id="panel1a-header"
+							>
+								<div className="itemHeading">
+									<div className='itemHeadingText'>{rest.name}</div>
+									<div className='itemHeadingText' id="score">Listr Score: {rest.vote}</div>
+									<div className='itemHeadingText' id='distance'>{Number(getMiles(rest.distance).toFixed(2))} Miles from you!</div>
+									<div className='itemHeadingText' id='distanceMobile'>{Number(getMiles(rest.distance).toFixed(2))} Miles</div>
+								</div>
 
-						</ExpansionPanelSummary>
-						<ExpansionPanelDetails>
-							<Typography className="detailsList">
-								<li>Phone : {rest.display_phone}</li>
-								<li>Address : {rest.location.address1}.
+							</ExpansionPanelSummary>
+							<ExpansionPanelDetails>
+								<Typography className="detailsList">
+									<li>Phone : {rest.display_phone}</li>
+									<li>Address : {rest.location.address1}.
 								 {rest.location.city}, {rest.location.state}</li>
-								<li>Price range : {price(rest.price)}</li>
-							</Typography>
-						</ExpansionPanelDetails>
-					</ExpansionPanel>
-				</div>
-
-
-			))}
-
-		</div>
-	)};
+									<li>Price range : {price(rest.price)}</li>
+									<li id="scoreMobile">Listr Score: {rest.vote}</li>
+								</Typography>
+							</ExpansionPanelDetails>
+						</ExpansionPanel>
+					</div>
+				))}
+			</div>
+		)
+	}
 }
+
 
 export default Listings

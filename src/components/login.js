@@ -27,7 +27,6 @@ export default function LogIn() {
 	
 	async function handleSubmit (e){
 		console.log(user.username)
-
 		let response = await fetch('http://localhost:8080/login', {
 			method: 'POST',
 			headers: {
