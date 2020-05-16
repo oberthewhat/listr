@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,7 +9,37 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import FormDialog from '../containers/createuser';
 
 export default function LogIn() {
+
+	const [loggedIn, setLogStatus] = useState(false)
 	const [open, setOpen] = React.useState(false);
+	const [user, setLogin] = useState({
+		username: '',
+		password: ''
+});
+	
+
+	function handleChange(e) {
+		const { id, value } = e.target;
+		setLogin(user => ({ ...user, [id]: value }));
+	}
+	
+	
+	async function handleSubmit (e){
+		console.log(user.username)
+
+		let response = await fetch('http://localhost:8080/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(user)
+		});
+		
+		let result = await response.json();
+		console.log(result)
+		console.log("user Submit", user)
+		}
+	
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -22,7 +52,7 @@ export default function LogIn() {
 	return (
 		<div>
 			<Button variant="outlined" color="inherit" onClick={handleClickOpen}>
-				Sign Out
+				Sign in to vote!
       </Button>
 			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Sign In</DialogTitle>
@@ -33,23 +63,27 @@ export default function LogIn() {
 					<TextField
 						autoFocus
 						margin="dense"
-						id="name"
+						id="username"
+						onChange={handleChange}
+						value={user.username}
 						label="Username"
-						type="email"
+						type="username"
 						fullWidth
 					/>
 					<TextField
 						id="password"
+						onChange={handleChange}
 						label="Password"
 						type="password"
 						autoComplete="current-password"
+						value={user.password}
 						fullWidth
 					/>
 
 				</DialogContent>
 				<DialogActions>
 					{/* MAKE THIS BUTTON HANDLE SIGN IN */}
-					<Button onClick={handleClose} color="primary">
+					<Button onClick={handleSubmit} color="primary">
 						Sign In
           </Button>
 					<Button onClick={handleClose} color="primary">

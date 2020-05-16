@@ -1,17 +1,10 @@
 const express = require("express");
-var bodyParser =require("body-parser")
 const usersRouter = require('./backend/router/users');
 const restaurantRouter = require('./backend/router/restaurants')
+const authRouter = require("./backend/router/auth");
 const app = express()
 const port = process.env.PORT || 8080;
-
-// Listen on a specific host via the HOST environment variable
 var host = process.env.HOST || '127.0.0.1';
-// Listen on a specific port via the PORT environment variable
- 
-// var cors = require('cors');
-// app.use(cors({origin: '*'}));
-
 
 var cors_proxy = require('cors-anywhere');
 cors_proxy.createServer({
@@ -30,7 +23,7 @@ app.use((req, res, next) => {
 app.use(express.json())
 app.use('/', usersRouter)
 app.use('/listings', restaurantRouter )
-
+app.use('/login', authRouter)
 
 // app.post()
 
