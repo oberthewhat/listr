@@ -42,7 +42,6 @@ const Listings = (props) => {
 
 	const classes = useStyles();
 
-
 	let yelpPlaces = props.place.map(d => {
 		return Object.assign(d, { vote: 0 })
 
@@ -53,8 +52,6 @@ const Listings = (props) => {
 	var [restID, setID] = useState('')
 	const [data, setData] = useState();
 
-	console.log("Places from yelp with 0 vote added to object", yelpPlaces)
-	
 	const fetchData = async () => {
 			const result = await axios(
 				'http://localhost:8080/listings',
@@ -107,8 +104,6 @@ const Listings = (props) => {
 		let decrementer = () => {
 			setCount(count = targetRest[0].vote_total - 1)
 		}
-
-		console.log("yelp places", yelpPlaces)
 		console.log("target Rest", data)
 
 
@@ -201,6 +196,11 @@ const Listings = (props) => {
 
 	yelpPlaces.sort(compare)
 	/////////////////////////////        RETURN    ///////////////////////////////////////////
+
+
+	if(props.place.length == 0) {
+    return <div></div>
+	} else {
 	return (
 		<div className={classes.root}>
 			{yelpPlaces.map((rest, i) => (
@@ -241,7 +241,7 @@ const Listings = (props) => {
 			))}
 
 		</div>
-	);
+	)};
 }
 
 export default Listings

@@ -2,7 +2,6 @@ const pool = require("../sql/connection")
 const mysql = require("mysql")
 const {handleSQLError} = require("../sql/error")
 
-
 const createUser = (req, res) => {
 
   pool.query(
@@ -23,5 +22,5 @@ const createUser = (req, res) => {
 };
 
 module.exports = {
-  createUser
+  createUser,
 };

@@ -22,7 +22,7 @@ export default function LogIn() {
 	return (
 		<div>
 			<Button variant="outlined" color="inherit" onClick={handleClickOpen}>
-				Sign in to vote
+				Sign Out
       </Button>
 			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Sign In</DialogTitle>

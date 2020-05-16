@@ -70,9 +70,11 @@ handleLocationError(error) {
 }
 
 	render() {
-		return (
+		if(this.state.latitude == null){
+			return <div className='conditionalLoading'>Loading!!!</div>
+		} else
+	return (
 			<div className='homeBody'>
-
 				<div id='chooseHeading'>Choose a cuisine</div>
 				<div className="homeMain">
 					<div className="iconContainer">
