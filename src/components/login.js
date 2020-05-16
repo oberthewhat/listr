@@ -10,7 +10,8 @@ import FormDialog from '../containers/createuser';
 
 export default function LogIn() {
 
-	const [loggedIn, setLogStatus] = useState(false)
+	const [button, setButton] = useState('Sign in to Vote')
+	const [loggedOn, setLogStatus] = useState(false)
 	const [open, setOpen] = React.useState(false);
 	const [user, setLogin] = useState({
 		username: '',
@@ -38,8 +39,14 @@ export default function LogIn() {
 		let result = await response.json();
 		console.log(result)
 		console.log("user Submit", user)
+		if(result.token) {
+			setLogStatus(true) 
+			window.alert('You are now logged in!')
+			setOpen(false)
+			setButton('Sign Out')
 		}
-	
+		}
+	console.log(loggedOn)
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -52,7 +59,7 @@ export default function LogIn() {
 	return (
 		<div>
 			<Button variant="outlined" color="inherit" onClick={handleClickOpen}>
-				Sign in to vote!
+				{button}
       </Button>
 			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Sign In</DialogTitle>
