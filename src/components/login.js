@@ -44,9 +44,8 @@ export default function LogIn(props) {
 			}
 		}
 	}
-
+		let innerText= ''
 	const buttonText = () => {
-		let innerText = ''
 		if (props.logStatus === true) {
 			return innerText = 'Sign Out'
 		} else {
