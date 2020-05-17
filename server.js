@@ -4,7 +4,7 @@ const restaurantRouter = require('./backend/router/restaurants')
 const authRouter = require("./backend/router/auth");
 const app = express()
 const port = process.env.PORT || 5000;
-var host = process.env.HOST || '127.0.0.1';
+// var host = process.env.HOST || '127.0.0.1';
 const cors = require("cors")
 app.use(cors())
 
@@ -34,6 +34,10 @@ app.use(express.json())
 app.use('/', usersRouter)
 app.use('/listings', restaurantRouter )
 app.use('/login', authRouter)
+
+app.get('/', (req, res) => {
+  res.send('Welcome to our server!')
+})
 
 
 app.listen(port, () => {
