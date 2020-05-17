@@ -15,6 +15,8 @@ cors_proxy.createServer({
     console.log('Running CORS Anywhere on ' + host + ':' + port);
 });
 
+
+app.use(express.static('public'))
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -23,7 +25,7 @@ app.use((req, res, next) => {
   );
   next();
 })
-app.use(express.static('public'))
+
 
 app.use(express.json())
 app.use('/', usersRouter)
