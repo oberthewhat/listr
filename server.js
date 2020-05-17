@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   );
   next();
 })
-app.use(express.static('public'))
+app.use(express.static('build'))
 
 app.use(express.json())
 app.use('/', usersRouter)
