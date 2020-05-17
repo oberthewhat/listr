@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   );
   next();
 })
-
+app.use(express.static('build'))
 var cors_proxy = require('cors-anywhere');
 cors_proxy.createServer({
     originWhitelist: [], // Allow all origins
@@ -26,7 +26,7 @@ cors_proxy.createServer({
     console.log('Running CORS Anywhere on ' + host + ':' + port);
 });
 
-app.use(express.static('build'))
+
 
 app.use(express.json())
 app.use('/', usersRouter)
