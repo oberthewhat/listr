@@ -58,6 +58,7 @@ const Listings = (props) => {
 	const fetchData = async () => {
 		const result = await axios('https://restaurantlistr.herokuapp.com/listings');
 
+		setData(result.data);
 	};
 console.log("after axios fetch",data)
 	useEffect(() => {
