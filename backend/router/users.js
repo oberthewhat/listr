@@ -11,7 +11,7 @@ router.use(function(req, res, next) {
   next();
 });
 
-router.post('/', usersController.createUser)
+router.post('/api/', usersController.createUser)
 
 module.exports = router
 

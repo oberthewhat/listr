@@ -11,6 +11,6 @@ router.use(function(req, res, next) {
   next();
 });
 
-router.post('/login', authController.login)
+router.post('/api/login', authController.login)
 
 module.exports = router

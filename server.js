@@ -4,7 +4,7 @@ const restaurantRouter = require('./backend/router/restaurants')
 const authRouter = require("./backend/router/auth");
 const app = express()
 const port = process.env.PORT || 8080;
-var host = process.env.HOST || '127.0.0.1';
+// var host = process.env.HOST || '127.0.0.1';
 const cors = require("cors")
 
 // var cors_proxy = require('cors-anywhere');
