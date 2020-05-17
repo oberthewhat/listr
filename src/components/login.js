@@ -35,7 +35,7 @@ export default function LogIn(props) {
 				body: JSON.stringify(user)
 			});
 
-			let result = await response.text();
+			let result = await response.json();
 			console.log(result)
 			if (result.token) {
 				props.loggedIn(true)
