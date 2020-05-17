@@ -34,11 +34,11 @@ export const getPlace = (lat, lon, type) => {
 
 
 	const apiKey = "p7pqhAhOBOUl2TTVv5dv3wG5aJeF5B88Omtb6vTw_yQv9qT75lLeB_0KnVsG__KXNTBte05YWGixZixSprR1XpLuL4QCuVMhHZ4ydate1TEBdHCpSluwzkBb2ja6XnYx"
-	const proxy = "https://restaurantlistr.herokuapp.com/"
+	const proxy = "https://cors-anywhere.herokuapp.com/"
 	const yelp = `https://api.yelp.com/v3/businesses/search?term=${type}&latitude=${lat}&longitude=${lon}&limit=20`
 
 	return (dispatch) => {
-		fetch(yelp, { 
+		fetch(proxy + yelp, { 
 			headers: {
 				Authorization: `Bearer ${apiKey}`
 			}

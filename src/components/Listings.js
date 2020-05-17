@@ -57,7 +57,7 @@ const Listings = (props) => {
 
 	const fetchData = async () => {
 		const result = await axios(
-			'https://restaurantlistr.herokuapp.com/listings',
+			'http://localhost:5000/listings',
 		);
 
 		setData(result.data);
@@ -69,7 +69,7 @@ const Listings = (props) => {
 
 	const voteFetch = async function (newVoteTotal, fetchType) {
 
-		let response = await fetch('https://restaurantlistr.herokuapp.com/listings', {
+		let response = await fetch('http://localhost:5000/listings', {
 			method: fetchType,
 			headers: {
 				'Content-Type': 'application/json',
