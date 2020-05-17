@@ -32,7 +32,7 @@ async function handleSubmit (e){
 		password: user.password
 	};
 
-	let response = await fetch('https://restaurantlistr.herokuapp.com', {
+	let response = await fetch('https://restaurantlistr.herokuapp.com/api', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ async function handleSubmit (e){
 		body: JSON.stringify(newUser)
 	});
 	
-	let result = await response.json();
+	let result = await response.text();
 	console.log(result)
 	
  window.alert('Account Created!')

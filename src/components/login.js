@@ -27,7 +27,7 @@ export default function LogIn(props) {
 			props.loggedIn(false)
 			setOpen(false)
 		} else {
-			let response = await fetch('https://restaurantlistr.herokuapp.com/login', {
+			let response = await fetch('https://restaurantlistr.herokuapp.com/api/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export default function LogIn(props) {
 				body: JSON.stringify(user)
 			});
 
-			let result = await response.json();
+			let result = await response.text();
 			console.log(result)
 			if (result.token) {
 				props.loggedIn(true)
