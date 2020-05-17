@@ -32,7 +32,7 @@ async function handleSubmit (e){
 		password: user.password
 	};
 
-	let response = await fetch('http://localhost:5000', {
+	let response = await fetch('https://restaurantlistr.herokuapp.com', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
