@@ -70,4 +70,5 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "http-proxy-middleware": "^1.0.3"
   }
+  
 }
