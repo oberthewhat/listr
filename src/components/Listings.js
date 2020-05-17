@@ -9,6 +9,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import axios from "axios"
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
@@ -55,20 +56,18 @@ const Listings = (props) => {
 	const [data, setData] = useState([]);
 
 	const fetchData = async () => {
-		const result = await fetch(
-			'/listings',
-		);
+		const result = await axios('https://restaurantlistr.herokuapp.com/listings');
 
 		setData(result.data);
 	};
-
+console.log("after axios fetch",data)
 	useEffect(() => {
 		fetchData();
 	}, []);
 
 	const voteFetch = async function (newVoteTotal, fetchType) {
 
-		let response = await fetch('/listings', {
+		let response = await fetch('https://restaurantlistr.herokuapp.com/listings', {
 			method: fetchType,
 			headers: {
 				'Content-Type': 'application/json',
