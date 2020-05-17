@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 const Listings = (props) => {
 
-
+console.log(props.logStatus)
 	const classes = useStyles();
 	let yelpPlaces = []
 
@@ -200,7 +200,7 @@ const Listings = (props) => {
 	if (yelpPlaces.length === 0) {
 		return (
 			<div className="loadingDiv">
-				<CircularProgress className="progress" color="inherit" />
+				<CircularProgress className="progress" />
 			</div>)
 	} else {
 		return (
@@ -209,6 +209,7 @@ const Listings = (props) => {
 					console.log("yelpPlaces : ", yelpPlaces)}
 				{yelpPlaces.map((rest, i) => (
 					<div className='listItem' key={i}>
+						{props.logStatus && 
 						<Box boxShadow={2} className={classes.voter}>
 							<Button id={rest.id} value="upVote" onClick={handleVoteButton}  >
 								<ArrowUpwardIcon />
@@ -216,7 +217,7 @@ const Listings = (props) => {
 							<Button id={rest.id} value="downVote" onClick={handleVoteButton} >
 								<ArrowDownwardIcon />
 							</Button>
-						</Box>
+						</Box>}
 						<ExpansionPanel className="expansionPanel">
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon />}

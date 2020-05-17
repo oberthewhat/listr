@@ -8,10 +8,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import FormDialog from '../containers/createuser';
 
-export default function LogIn() {
+export default function LogIn(props) {
 
-	const [button, setButton] = useState('Sign in to Vote')
-	const [loggedOn, setLogStatus] = useState(false)
+  console.log(props.logStatus)
 	const [open, setOpen] = React.useState(false);
 	const [user, setLogin] = useState({
 		username: '',
@@ -26,7 +25,10 @@ export default function LogIn() {
 	
 	
 	async function handleSubmit (e){
-		console.log(user.username)
+    if(props.logStatus){
+			props.loggedIn(false)
+			setOpen(false)
+		} else {
 		let response = await fetch('http://localhost:8080/login', {
 			method: 'POST',
 			headers: {
@@ -39,16 +41,28 @@ export default function LogIn() {
 		console.log(result)
 		console.log("user Submit", user)
 		if(result.token) {
-			setLogStatus(true) 
+			props.loggedIn(true)
 			window.alert('You are now logged in!')
 			setOpen(false)
-			setButton('Sign Out')
 		}
+		}}
+
+const buttonText = () => {
+		let innerText = ''
+		if(props.logStatus === true) {
+		return	innerText =  'Sign Out'
+		} else {
+		return	innerText = 'sign in to vote!'
 		}
-	console.log(loggedOn)
+	}
 
 	const handleClickOpen = () => {
+		if(props.logStatus === true){
+			props.loggedIn(false)
+			setOpen(false)
+		}else {
 		setOpen(true);
+			}
 	};
 
 	const handleClose = () => {
@@ -58,7 +72,7 @@ export default function LogIn() {
 	return (
 		<div>
 			<Button variant="outlined" color="inherit" onClick={handleClickOpen}>
-				{button}
+				{buttonText()}
       </Button>
 			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Sign In</DialogTitle>

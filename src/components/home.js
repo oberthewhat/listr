@@ -18,7 +18,6 @@ import ReactTooltip from "react-tooltip";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Home extends Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {

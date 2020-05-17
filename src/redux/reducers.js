@@ -3,12 +3,11 @@ import { combineReducers } from 'redux'
 const logStatus = (state = false, action) => {
 	switch(action.type) {
 		case 'LOGGED_IN':
-			return [action.value]
+			return  action.value
 			default:
 			return state
 	}
 }
-
 
 const place = (state = [], action) => {
 	switch (action.type) {

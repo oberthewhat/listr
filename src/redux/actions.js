@@ -1,10 +1,4 @@
 
-export const userLogIn = (username) => {
-	return {
-		type: "LOGIN",
-		value: username
-	}
-}
 
 export const updateVote = (voteTotal) => {
 	return {
@@ -13,10 +7,10 @@ export const updateVote = (voteTotal) => {
 	}
 }
 
-export const loggedIn = (loggedIN) => {
+export const loggedIn = (status) => {
 	return {
 		type: "LOGGED_IN",
-		value: loggedIN
+		value: status
 	}
 }
 

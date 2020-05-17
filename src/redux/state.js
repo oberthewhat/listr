@@ -12,5 +12,5 @@ export default {
 	voteTotal: [
 		
 	],
-	log: false
+	logStatus: false
 }
