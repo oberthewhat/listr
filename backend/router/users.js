@@ -13,8 +13,8 @@ router.use(function(req, res, next) {
 
 router.post('/', usersController.createUser)
 
-router.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '../build/index.html'))
-})
+// router.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname + '../build/index.html'))
+// })
 module.exports = router
 
