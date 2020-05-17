@@ -13,11 +13,11 @@ router.use(function(req, res, next) {
 
 router.post('/', voterController.firstVote )
 
-router.put('/listings', voterController.restaurantVoter )
+router.put('/', voterController.restaurantVoter )
 
-router.get('/listings', voterController.getAllVotes)
+router.get('/', voterController.getAllVotes)
 
-router.post('/login', authController.login)
+router.post('/', authController.login)
 
 router.post('/', usersController.createUser)
 
