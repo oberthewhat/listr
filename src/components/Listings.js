@@ -42,7 +42,6 @@ const useStyles = makeStyles(theme => ({
 
 const Listings = (props) => {
 
-console.log(props.logStatus)
 	const classes = useStyles();
 	let yelpPlaces = []
 
@@ -79,7 +78,6 @@ console.log(props.logStatus)
 			body: JSON.stringify(newVoteTotal)
 		});
 		let result = await response.json();
-		console.log("fetch result", result)
 	}
 
 	///////////////////          VOTE BUTTON HANDLER        //////////////
@@ -125,7 +123,7 @@ console.log(props.logStatus)
 			return;
 		}
 
-		////////////////    OLD VOTE     /////////////////////////
+		////////////////    A VOTE EXISTS     /////////////////////////
 
 
 		if (targetRest[0].restaurant_id) {

@@ -10,59 +10,57 @@ import FormDialog from '../containers/createuser';
 
 export default function LogIn(props) {
 
-  console.log(props.logStatus)
 	const [open, setOpen] = React.useState(false);
 	const [user, setLogin] = useState({
 		username: '',
 		password: ''
-});
-	
+	});
 
 	function handleChange(e) {
 		const { id, value } = e.target;
 		setLogin(user => ({ ...user, [id]: value }));
 	}
-	
-	
-	async function handleSubmit (e){
-    if(props.logStatus){
+
+
+	async function handleSubmit(e) {
+		if (props.logStatus) {
 			props.loggedIn(false)
 			setOpen(false)
 		} else {
-		let response = await fetch('http://localhost:8080/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(user)
-		});
-		
-		let result = await response.json();
-		console.log(result)
-		console.log("user Submit", user)
-		if(result.token) {
-			props.loggedIn(true)
-			window.alert('You are now logged in!')
-			setOpen(false)
-		}
-		}}
+			let response = await fetch('http://localhost:8080/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(user)
+			});
 
-const buttonText = () => {
+			let result = await response.json();
+			console.log(result)
+			if (result.token) {
+				props.loggedIn(true)
+				window.alert('You are now logged in!')
+				setOpen(false)
+			}
+		}
+	}
+
+	const buttonText = () => {
 		let innerText = ''
-		if(props.logStatus === true) {
-		return	innerText =  'Sign Out'
+		if (props.logStatus === true) {
+			return innerText = 'Sign Out'
 		} else {
-		return	innerText = 'sign in to vote!'
+			return innerText = 'sign in to vote!'
 		}
 	}
 
 	const handleClickOpen = () => {
-		if(props.logStatus === true){
+		if (props.logStatus === true) {
 			props.loggedIn(false)
 			setOpen(false)
-		}else {
-		setOpen(true);
-			}
+		} else {
+			setOpen(true);
+		}
 	};
 
 	const handleClose = () => {
@@ -73,7 +71,7 @@ const buttonText = () => {
 		<div>
 			<Button variant="outlined" color="inherit" onClick={handleClickOpen}>
 				{buttonText()}
-      </Button>
+			</Button>
 			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Sign In</DialogTitle>
 				<DialogContent>
