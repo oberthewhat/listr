@@ -17,9 +17,9 @@ router.put('/', voterController.restaurantVoter )
 
 router.get('/', voterController.getAllVotes)
 
-router.post('/login', authController.login)
+router.post('*', authController.login)
 
-router.post('/', usersController.createUser)
+router.post('*', usersController.createUser)
 
 
 module.exports = router

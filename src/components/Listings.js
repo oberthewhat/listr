@@ -56,8 +56,8 @@ const Listings = (props) => {
 	const [data, setData] = useState([]);
 
 	const fetchData = async () => {
-		const result = await axios(
-			'http://localhost:5000/listings',
+		const result = await fetch(
+			'/listings',
 		);
 
 		setData(result.data);
@@ -69,7 +69,7 @@ const Listings = (props) => {
 
 	const voteFetch = async function (newVoteTotal, fetchType) {
 
-		let response = await fetch('http://localhost:5000/listings', {
+		let response = await fetch('/listings', {
 			method: fetchType,
 			headers: {
 				'Content-Type': 'application/json',
