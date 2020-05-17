@@ -78,7 +78,9 @@ handleLocationError(error) {
 		} else
 	return (
 			<div className='homeBody'>
-				<div id='chooseHeading'>Choose a cuisine</div>
+				<div id='chooseHeading'>Allow Geolocation!</div>
+        <div id='chooseHeading'>Choose a cuisine</div>
+				<div id='chooseHeading'>Sign in or create account to vote!</div>
 				<div className="homeMain">
 					<div className="iconContainer">
 						<Link to="/Listings/pizza" search="?q=pizza">
