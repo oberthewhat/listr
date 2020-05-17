@@ -16,6 +16,16 @@ app.use((req, res, next) => {
   );
   next();
 })
+
+var cors_proxy = require('cors-anywhere');
+cors_proxy.createServer({
+    originWhitelist: [], // Allow all origins
+    requireHeader: ['origin', 'x-requested-with'],
+    removeHeaders: ['cookie', 'cookie2']
+}).listen(port, host, function() {
+    console.log('Running CORS Anywhere on ' + host + ':' + port);
+});
+
 app.use(express.static('build'))
 
 app.use(express.json())
@@ -23,11 +33,7 @@ app.use('/', usersRouter)
 app.use('/listings', restaurantRouter )
 app.use('/login', authRouter)
 
-// app.post()
 
-// app.put()
-
-// Use this method to give you feedback as to when the server 
 app.listen(port, () => {
   console.log(`Server is listening on port${port}.`)
 })
