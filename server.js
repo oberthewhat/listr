@@ -6,16 +6,8 @@ const app = express()
 const port = process.env.PORT || 8080;
 // var host = process.env.HOST || '127.0.0.1';
 const cors = require("cors")
-
-// var cors_proxy = require('cors-anywhere');
-// cors_proxy.createServer({
-//     originWhitelist: [], // Allow all origins
-//     requireHeader: ['origin', 'x-requested-with'],
-//     removeHeaders: ['cookie', 'cookie2']
-// }).listen(port, host, function() {
-//     console.log('Running CORS Anywhere on ' + host + ':' + port);
-// });
 app.use(cors())
+
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
