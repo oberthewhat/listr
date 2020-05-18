@@ -5,6 +5,7 @@ import {
 	FaHamburger,
 	FaFish
 } from 'react-icons/fa'
+import { TiBeer } from "react-icons/ti";
 import {
 	GiNoodles,
 	GiSandwich,
@@ -109,6 +110,9 @@ handleLocationError(error) {
 						</Link>
 						<Link to="/Listings/steak">
 						<Button id='steak' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'steak')}data-tip='steak' ><GiSteak className='icons' /></Button>
+						</Link>
+						<Link to="/Listings/breweries">
+						<Button id='steak' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'brewery')}data-tip='Breweries' ><TiBeer className='icons' /></Button>
 						</Link>
 						<ReactTooltip />
 					</div>

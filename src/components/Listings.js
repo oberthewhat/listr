@@ -83,9 +83,11 @@ console.log("after axios fetch",data)
 
 	async function handleVoteButton(e) {
 
+		//sets hook to the currently selected place
 		let id = e.currentTarget.id
 		setID(restID = id)
 
+		//     filters through array of restaurants and returns the one with matched restaurant ID
 		let targetRest = data.filter(restaurant => {
 			if (restaurant.restaurant_id === id) {
 				return restaurant.restaurant_id
@@ -94,6 +96,8 @@ console.log("after axios fetch",data)
 				return false
 			}
 		})
+
+		///////////    math function for the vote to be handled correctly
 
 		let incrementer = () => {
 			setCount(count = targetRest[0].vote_total + 1)
@@ -104,6 +108,8 @@ console.log("after axios fetch",data)
 		}
 
 		//////////  NEW VOTE   /////////////////
+
+		//    this says if the restaurant has a zero vote it has likely not been voted on yet. in which case will add the vote and vote id with a POST to the database stored in mySQL
 		if (targetRest.length == 0) {
 			console.log(e.currentTarget.id)
 			if (e.currentTarget.value === "upVote") {
@@ -122,6 +128,8 @@ console.log("after axios fetch",data)
 		}
 
 		////////////////    A VOTE EXISTS     /////////////////////////
+
+		//     this simply looks at the vote and either adds to it or takes from it, then does a put to place into the DB
 
 
 		if (targetRest[0].restaurant_id) {
@@ -176,6 +184,7 @@ console.log("after axios fetch",data)
 		}
 	})
 
+	//here i compare the votes from my yelpAPI list and my SQL DB list and compares them to display results in order. 
 	function compare(a, b) {
 		const restA = a.vote;
 		const restB = b.vote;
