@@ -3,7 +3,8 @@ import { Button } from '@material-ui/core';
 import {
 	FaPizzaSlice,
 	FaHamburger,
-	FaFish
+	FaFish,
+	Facoffee
 } from 'react-icons/fa'
 import { TiBeer } from "react-icons/ti";
 import {
@@ -112,7 +113,10 @@ handleLocationError(error) {
 						<Button id='steak' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'steak')}data-tip='steak' ><GiSteak className='icons' /></Button>
 						</Link>
 						<Link to="/Listings/breweries">
-						<Button id='steak' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'brewery')}data-tip='Breweries' ><TiBeer className='icons' /></Button>
+						<Button id='Breweries' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'brewery')}data-tip='Breweries' ><TiBeer className='icons' /></Button>
+						</Link>
+						<Link to="/Listings/coffee">
+						<Button id='coffee' onClick={() => this.props.getPlace(this.state.latitude,this.state.longitude,'coffee')}data-tip='coffee' ><Facoffee className='icons' /></Button>
 						</Link>
 						<ReactTooltip />
 					</div>
