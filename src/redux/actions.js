@@ -23,7 +23,6 @@ export const newUser = (text) => {
 }
 
 export const getCoords = (coords) => {
-	console.log("actions", coords)  // checking actions 
 	return {
 		type: "GET_COORDS",
 		value: coords

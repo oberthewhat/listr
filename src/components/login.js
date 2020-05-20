@@ -36,7 +36,6 @@ export default function LogIn(props) {
 			});
 
 			let result = await response.json();
-			console.log(result)
 			if(!result.token){
         window.alert('Wrong Password')
 			} else

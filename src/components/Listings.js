@@ -60,7 +60,6 @@ const Listings = (props) => {
 
 		setData(result.data);
 	};
-console.log("after axios fetch",data)
 	useEffect(() => {
 		fetchData();
 	}, []);
@@ -111,7 +110,6 @@ console.log("after axios fetch",data)
 
 		//    this says if the restaurant has a zero vote it has likely not been voted on yet. in which case will add the vote and vote id with a POST to the database stored in mySQL
 		if (targetRest.length == 0) {
-			console.log(e.currentTarget.id)
 			if (e.currentTarget.value === "upVote") {
 				setCount(count = 1)
 			}
@@ -174,7 +172,6 @@ console.log("after axios fetch",data)
 
 	yelpPlaces.map(restaurant => {
 		if (yelpPlaces.length === 0) {
-			console.log("empty")
 		} else {
 			for (let i = 0; i < data.length; i++) {
 				if (restaurant.id === data[i].restaurant_id) {
@@ -210,12 +207,10 @@ console.log("after axios fetch",data)
 	} else {
 		return (
 			<div className={classes.root}>
-				{console.log("data : ", data),
-					console.log("yelpPlaces : ", yelpPlaces)}
 				{yelpPlaces.map((rest, i) => (
 					<div className='listItem' key={i}>
 						{props.logStatus && 
-						<Box boxShadow={2} className={classes.voter}>
+						<Box boxShadow={2} className={classes.votr}>
 							<Button id={rest.id} value="upVote" onClick={handleVoteButton}  >
 								<ArrowUpwardIcon />
 							</Button>

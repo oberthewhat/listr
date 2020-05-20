@@ -4,8 +4,6 @@ const {handleSQLError} = require("../sql/error")
 
 ////////////////    INSERT NEW VOTE TO DB      /////////////////////
 const firstVote = (req, res) => {
-console.log("POST FUNCTION vote total ", req.body.vote_total)
-console.log("POST FUNCTION id: ", req.body.restaurant_id)
 
 let sql = "INSERT INTO UserDB.restaurantVotes (restaurant_id, vote_total) VALUES (?, ?)";
 sql = mysql.format(sql, [req.body.restaurant_id, req.body.vote_total])
@@ -35,7 +33,6 @@ const getAllVotes = (req, res) => {
 
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res,err);
-    console.log(rows)
     return res.json(rows)
   })
 } 
