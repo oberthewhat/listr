@@ -210,7 +210,7 @@ const Listings = (props) => {
 				{yelpPlaces.map((rest, i) => (
 					<div className='listItem' key={i}>
 						{props.logStatus && 
-						<Box boxShadow={2} className={classes.votr}>
+						<Box boxShadow={2} className={classes.voter}>
 							<Button id={rest.id} value="upVote" onClick={handleVoteButton}  >
 								<ArrowUpwardIcon />
 							</Button>
