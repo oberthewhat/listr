@@ -102,7 +102,7 @@ export default function LogIn(props) {
 				</DialogContent>
 				<DialogActions>
 					{/* MAKE THIS BUTTON HANDLE SIGN IN */}
-					<Button onClick={handleSubmit} color="primary">
+					<Button onClick={handleSubmit} id="signInButton" variant="outlined" color="inherit" >
 						Sign In
           </Button>
 					<Button onClick={handleClose} color="primary">

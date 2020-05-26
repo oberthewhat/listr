@@ -40,9 +40,10 @@
 }
 
 #createButton {
-  background-color: #035c7d;
-  color: white;
+  /* background-color: #035c7d; */
+  color: #035c7d;
   margin-left: 5px;
+  border: none;
 }
 
 #listrTitle {
@@ -68,6 +69,11 @@
   font-size: 15px;
   text-shadow: 1px 1px 1px rgba(131, 131, 131, 0.294);
 
+}
+
+#signInButton {
+  background-color: #035c7d;
+  color: white;
 }
 
 footer {
