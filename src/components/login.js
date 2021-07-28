@@ -46,7 +46,10 @@ export default function LogIn(props) {
 			}
 		}
 	}
-		let innerText= ''
+
+	
+	let innerText= ''
+
 	const buttonText = () => {
 		if (props.logStatus === true) {
 			return innerText = 'Sign Out'
@@ -76,9 +79,9 @@ export default function LogIn(props) {
 			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Sign In</DialogTitle>
 				<DialogContent>
-					<DialogContentText>
+						<DialogContentText>
 						Log in here to vote a restaurant up or down.
-          </DialogContentText>
+         			 	</DialogContentText>
 					<TextField
 						autoFocus
 						margin="dense"
